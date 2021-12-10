@@ -28,7 +28,7 @@ const AnimeInd = ({ width, visible, toTop }) => {
       )}
       <Top visible={visible} toTop={toTop} />
 
-      <Footer />
+      {(anime || error) && <Footer />}
     </>
   );
 };
