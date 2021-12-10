@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.abc{
+  color: #ecf3d9;
+  color: rgb(34, 40, 49); /*black*/
+  color: rgb(57, 62, 70);  /*grey*/
+  color: rgb(253, 112, 20); /*orange*/
+  color: hsl(0, 0%, 93%); /*white*/
+
+}
