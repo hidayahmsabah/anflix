@@ -58,7 +58,7 @@ const SearchResults = () => {
     <Wrapper>
       {/* <Filter initial={pathName} test={testClick} text="test 1" /> */}
       <h2>
-        {`${result.length} results found for search`} <i>{defaultTitle}</i>{" "}
+        {`${result.length} results found for search`} <i>{title}</i>{" "}
       </h2>
       <Content>
         {loading && !result ? (

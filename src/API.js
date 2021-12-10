@@ -20,7 +20,7 @@ const fetchingData = {
 
   // searching query
   GetSearchAnime: async (searchTerm, page) => {
-    console.log(`${malUrl}/search/anime?q=${searchTerm}&page=${page}`);
+    // console.log(`${malUrl}/search/anime?q=${searchTerm}&page=${page}`);
     return await (
       await fetch(`${malUrl}/search/anime?q=${searchTerm}&page=${page}`)
     ).json();
@@ -61,7 +61,7 @@ const fetchingData = {
   GetAnimeAni: async (animeId) => {
     // console.log(`${aniUrl}/anime?mal_id=${animeId}`);
     return await (
-      await (await fetch(`${aniUrl}/anime?mal_id=${animeId}`)).json()
+      await (await fetch(`${aniUrl}/anime?mal_id=${animeId}&nsfw=false`)).json()
     ).data.documents[0];
   },
 

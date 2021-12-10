@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import useWindowSize from "./hooks/useWindowSize";
 import { GlobalStyles } from "./GlobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -14,16 +14,16 @@ function App() {
   const [visible, setVisible] = useState(false);
   const [width] = useWindowSize();
 
-  const GetTopAnime = async () => {
-    const temp = await fetch(`https://api.jikan.moe/v3/anime/45576`).then(
-      (res) => res.json()
-    );
-    console.log(temp);
-  };
+  // const GetTopAnime = async () => {
+  //   const temp = await fetch(`https://api.jikan.moe/v3/anime/45576`).then(
+  //     (res) => res.json()
+  //   );
+  //   console.log(temp);
+  // };
 
-  useEffect(() => {
-    GetTopAnime();
-  }, []);
+  // useEffect(() => {
+  //   GetTopAnime();
+  // }, []);
 
   useLayoutEffect(() => {
     window.addEventListener("scroll", toggleVisible);

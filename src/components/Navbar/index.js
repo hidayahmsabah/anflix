@@ -44,8 +44,10 @@ const Navbar = ({ index, width }) => {
   function searchEnter(e) {
     const value = inputRef.current.value;
     if (e.key === "Enter") {
-      navigate(`/search/${value}`);
-      inputRef.current.value = "";
+      if (value.length > 2) {
+        navigate(`/search/${value}`);
+        inputRef.current.value = "";
+      }
     }
   }
 
@@ -79,6 +81,7 @@ const Navbar = ({ index, width }) => {
           ref={inputRef}
           className={`${search && "active"}`}
           onKeyUp={(e) => searchEnter(e)}
+          placeholder="3 Letters Min"
         />
       </SearchBar>
     </Wrapper>
