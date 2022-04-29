@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# AnFlix
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[AnFlix](https://anflix.netlify.app/) is an anime database website which connects information from both MyAnimeList and Anilist page. It utilizes MyAnimeList (MAL) unofficial API: [Jikan](https://jikan.moe/) and [Anilist official API](https://anilist.gitbook.io/anilist-apiv2-docs/). 
 
-## Available Scripts
+## Background
 
-In the project directory, you can run:
+Anime fans rely heavily on anime database sites such as MAL and Anilist to look up more information about their favorite series/movies.
 
-### `npm start`
+MAL has always been the more popular of the two as it has been around for longer and has forums in which fans can use to discuss and interact with each other about their favorite anime. Unfortunately, the site's design is quite dated, difficult to navigate and not mobile friendly. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Anilist takes care of all of the above concerns but their database is not as comprehensive as MAL. Their search engine does not cover both English and Japanese titles which makes searching for a specific animes a hassle.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+AnFlix is build to bridge the gap between the two anime database sites with the help of the design, which is heavily influenced by the globally popular online streaming service platform, Netflix and usage of both sites' APIs. Thus, the name AnFlix.  
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Header with randomized anime that refreshes every time the page is loaded 
+- Homepage that automatically chooses 5 anime genres to showcase to the users and display its top 20 animes 
+- Search engine that works to find animes written both in English and Romanized Japanese
+- Find popular animes of all times, will be aired or currently airing based on MAL rating  
+- Find animes by series/movies via alphabets
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Randomized Header](images/header-desktop.PNG?raw=true)
+![Genres](images/genres-desktop.PNG?raw=true)
+![Anime Page](images/anime-desktop.PNG?raw=true)
+![New and Popular](images/new-popular-desktop.PNG?raw=true)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Anflix uses a number of open source projects to work properly:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ReactJS](https://reactjs.org/) - JS library 
+- [Slick Carousel](https://react-slick.neostack.com/) - For carousel feature
+- [Styled Components](https://styled-components.com/) - For styles
+- [React Router](https://reactrouter.com/) -  For client-side routing
+- [React Select](https://react-select.com/home) - More Flexible Select Input Control
+- [React Icons](https://react-icons.github.io/react-icons/) - Icons
