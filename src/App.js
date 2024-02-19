@@ -72,7 +72,7 @@ function App() {
             }
           />
           <Route
-            path="/new%20popular"
+            path="/new_popular"
             element={
               <AnimeNew width={width} $visible={visible} toTop={scrollToTop} />
             }

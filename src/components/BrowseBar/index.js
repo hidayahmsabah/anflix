@@ -13,7 +13,7 @@ const BrowseBar = ({ browse, index }) => {
           <Link to="/movies">Movies</Link>
         </List>
         <List className={index === 3 && "active"}>
-          <Link to="/new%20popular">New & Popular</Link>
+          <Link to="/new_popular">New & Popular</Link>
         </List>
       </Content>
     </Wrapper>
