@@ -8,7 +8,7 @@ const Grid = ({ anime }) => {
 
   return (
     <Wrapper>
-      <Content to={`/${anime.mal_id}`}>
+      <Content to={`/anime/${anime.mal_id}`}>
         <div className="image-holder">
           <img
             src={anime.image_url}

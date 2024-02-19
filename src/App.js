@@ -78,7 +78,7 @@ function App() {
             }
           />
           <Route
-            path="/:animeId"
+            path="/anime/:animeId"
             element={
               <AnimeInd width={width} $visible={visible} toTop={scrollToTop} />
             }

@@ -33,7 +33,7 @@ const Header = ({ header, width, extra }) => {
   return (
     <>
       <Wrapper $header={header}>
-        <HeaderContent to={`/${header ? header.mal_id : ""}`}>
+        <HeaderContent to={`/anime/${header ? header.mal_id : ""}`}>
           <h3>
             {extra
               ? extra.title_english
