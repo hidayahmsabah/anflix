@@ -7,7 +7,7 @@ const AnimeResult = ({ width, visible, toTop }) => {
   return (
     <>
       <Navbar width={width} />
-      <SearchResults />
+      <SearchResults toTop={toTop}/>
       <Top $visible={visible} toTop={toTop} />
     </>
   );

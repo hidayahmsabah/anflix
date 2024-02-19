@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loading from "../Loading";
 import Grid from "../Grid";
 // import Filter from "../Filter";
@@ -8,7 +8,7 @@ import { useParams, useLocation } from "react-router";
 import { useSearchFetch } from "../../hooks/useSearchFetch";
 import Wrong from "../Wrong";
 
-const SearchResults = () => {
+const SearchResults = ({toTop}) => {
   const [page, setPage] = useState(1);
   const { title } = useParams();
   // const navigate = useNavigate();
@@ -53,6 +53,13 @@ const SearchResults = () => {
   function changePage() {
     setPage(page + 1);
   }
+
+  useEffect(() => {
+    setPage(1)
+    toTop()
+    // window.scrollTo(0, 0)
+    
+  }, [title])
 
   return (
     <Wrapper>
