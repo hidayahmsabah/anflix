@@ -4,12 +4,12 @@ import Navbar from "./Navbar";
 import Series from "./Series";
 import Top from "./Top";
 
-const AnimeMovies = ({ width, visible, toTop }) => {
+const AnimeMovies = ({ width, $visible, toTop }) => {
   return (
     <>
       <Navbar width={width} index={2} />
       <Series type="movie" />
-      <Top $visible={visible} toTop={toTop} />
+      <Top $visible={$visible} toTop={toTop} />
     </>
   );
 };
