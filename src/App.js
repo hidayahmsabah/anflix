@@ -40,53 +40,46 @@ function App() {
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <>
       <Router>
         <Routes>
           <Route
             path="/"
-            element={<Home width={width} $visible={visible} toTop={scrollToTop} />}
+            element={<Home width={width} $visible={visible} />}
           />
           <Route
             path="/anflix"
-            element={<Home width={width} $visible={visible} toTop={scrollToTop} />}
+            element={<Home width={width} $visible={visible} />}
           />
           <Route
             path="/series"
             element={
-              <AnimeSeries width={width} $visible={visible} toTop={scrollToTop} />
+              <AnimeSeries width={width} $visible={visible} />
             }
           />
           <Route
             path="/movies"
             element={
-              <AnimeMovies width={width} $visible={visible} toTop={scrollToTop} />
+              <AnimeMovies width={width} $visible={visible} />
             }
           />
           <Route
             path="/new_popular"
             element={
-              <AnimeNew width={width} $visible={visible} toTop={scrollToTop} />
+              <AnimeNew width={width} $visible={visible} />
             }
           />
           <Route
             path="/anime/:animeId"
             element={
-              <AnimeInd width={width} $visible={visible} toTop={scrollToTop} />
+              <AnimeInd width={width} $visible={visible} />
             }
           />
           <Route
             path="/search/:title"
             element={
-              <AnimeResult width={width} $visible={visible} toTop={scrollToTop} />
+              <AnimeResult width={width} $visible={visible} />
             }
           />
           <Route path="/*" element={<NotFound width={width} />} />

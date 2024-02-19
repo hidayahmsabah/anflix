@@ -6,7 +6,7 @@ import { useHomeFetch } from "../hooks/useHomeFetch";
 import { useGenreFetch } from "../hooks/useGenreFetch";
 import Top from "./Top";
 
-const Home = ({ width, $visible, toTop }) => {
+const Home = ({ width, $visible }) => {
   const { random, top, addInfo } = useHomeFetch();
   const { allGenres } = useGenreFetch();
 
@@ -29,7 +29,7 @@ const Home = ({ width, $visible, toTop }) => {
           ))
         )}
       </main>
-      <Top $visible={$visible} toTop={toTop} />
+      <Top $visible={$visible} />
     </>
   );
 };

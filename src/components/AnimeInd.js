@@ -7,7 +7,7 @@ import Top from "./Top";
 // import Loading from "./Loading";
 // import Wrong from "./Wrong";
 
-const AnimeInd = ({ width, $visible, toTop }) => {
+const AnimeInd = ({ width, $visible }) => {
   const { animeId } = useParams();
   const { anime, addInfo, seiyuu } = useAnimeFetch(animeId);
 
@@ -25,7 +25,7 @@ const AnimeInd = ({ width, $visible, toTop }) => {
       {(anime || addInfo) && (
         <AnimeInfo anime={anime} addInfo={addInfo} seiyuu={seiyuu} />
       )}
-      <Top $visible={$visible} toTop={toTop} />
+      <Top $visible={$visible} />
 
     </>
   );

@@ -8,7 +8,7 @@ import { useParams, useLocation } from "react-router";
 import { useSearchFetch } from "../../hooks/useSearchFetch";
 import Wrong from "../Wrong";
 
-const SearchResults = ({toTop}) => {
+const SearchResults = () => {
   const [page, setPage] = useState(1);
   const { title } = useParams();
   // const navigate = useNavigate();
@@ -56,8 +56,10 @@ const SearchResults = ({toTop}) => {
 
   useEffect(() => {
     setPage(1)
-    toTop()
-    // window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     
   }, [title])
 
