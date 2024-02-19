@@ -27,7 +27,7 @@ export const Tab = styled.div`
       cursor: pointer;
       transition: all 0.3s ease;
 
-      :hover {
+      &:hover {
         color: var(--white);
       }
 

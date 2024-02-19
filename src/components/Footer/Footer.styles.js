@@ -40,7 +40,7 @@ export const LogoML = styled(MAL)`
   transition: all 0.5s ease-out;
   margin: 0 0.1em;
 
-  :hover {
+  &:hover {
     color: var(--orange);
   }
 `;
@@ -51,7 +51,7 @@ export const LogoAL = styled(Ani)`
   transition: all 0.5s ease-out;
   margin: 0 0.1em;
 
-  :hover {
+  &:hover {
     color: var(--orange);
   }
 `;
@@ -62,7 +62,7 @@ export const LogoNF = styled(NF)`
   transition: all 0.5s ease-out;
   margin: 0 0.1em;
 
-  :hover {
+  &:hover {
     color: var(--orange);
   }
 `;

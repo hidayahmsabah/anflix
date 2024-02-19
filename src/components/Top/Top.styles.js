@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   transition: opacity 0.5s ease;
   display: ${({ visible }) => (visible ? "block" : "none")};
 
-  :hover {
+  &:hover {
     opacity: 1;
   }
 `;
@@ -23,7 +23,7 @@ export const Content = styled.button`
   border-radius: 1rem;
   cursor: pointer;
 
-  :hover > * {
+  &:hover > * {
     color: var(--orange);
   }
 

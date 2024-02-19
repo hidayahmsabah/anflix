@@ -92,7 +92,7 @@ export const Content = styled.form`
     max-width: 100%;
 
     div[role="button"] {
-      :hover {
+      &:hover {
         background-color: rgba(255, 123, 0, 0.7);
       }
     }

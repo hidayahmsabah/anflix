@@ -55,7 +55,7 @@ export const Head = styled.div`
       text-decoration: none;
       color: inherit;
 
-      :hover {
+      &:hover {
         color: var(--orange);
         transform: translateY(-10%);
       }

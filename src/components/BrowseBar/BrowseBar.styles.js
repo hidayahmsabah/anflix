@@ -46,7 +46,7 @@ export const List = styled.li`
     color: var(--white);
     transition: all 0.5s ease;
 
-    :hover {
+    &:hover {
       color: var(--orange);
       letter-spacing: 0.1em;
       text-shadow: 0px 1px 4px var(--grey);

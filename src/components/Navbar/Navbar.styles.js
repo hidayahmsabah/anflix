@@ -29,7 +29,7 @@ export const Logo = styled(Link)`
   transition: all 0.5s ease;
   text-decoration: none;
 
-  :hover {
+  &:hover {
     color: var(--orange);
     text-shadow: 0px 1px 4px var(--grey);
   }
@@ -67,7 +67,7 @@ export const List = styled.li`
     letter-spacing: 0.05em;
     transition: all 0.2s ease-out;
 
-    :hover {
+    &:hover {
       color: var(--orange);
       transform: translateY(-5%);
       letter-spacing: 0.1em;
@@ -86,8 +86,8 @@ export const Browse = styled.span`
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 
-  :hover,
-  :hover > * {
+  &:hover,
+  &:hover > * {
     color: var(--orange);
   }
 
@@ -136,7 +136,7 @@ export const SearchIcon = styled(FaSearch)`
   transition: all 0.5s ease;
   margin-right: 2%;
 
-  :hover {
+  &:hover {
     color: var(--orange);
     transform: translateY(-5%);
     text-shadow: 0px 1px 4px var(--grey);

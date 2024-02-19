@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
     cursor: pointer;
     transition: color 0.5s ease;
 
-    :hover {
+    &:hover {
       color: var(--orange);
     }
   }
@@ -50,7 +50,7 @@ export const Content = styled.div`
       transition: transform 0.5s ease;
       padding: 0.5em;
 
-      :hover {
+      &:hover {
         color: var(--orange);
         cursor: pointer;
         transform: translateY(-5%);

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  :hover {
+  &:hover {
     transform: translateY(-3%);
     letter-spacing: 0.03em;
   }

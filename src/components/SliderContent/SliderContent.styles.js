@@ -19,7 +19,7 @@ export const Wrapper = styled(Link)`
   transition: all 0.3s ease-in;
 
   @media (hover: hover) and (pointer: fine) {
-    :hover {
+    &:hover {
       box-shadow: 0px 5px 10px 3px var(--orange);
       background: linear-gradient(
           to bottom,
@@ -29,7 +29,7 @@ export const Wrapper = styled(Link)`
         center / cover no-repeat url(${({ cover }) => cover});
     }
 
-    :hover > div {
+    &:hover > div {
       font-weight: 400;
       text-shadow: 0px 3px 2px var(--orange);
     }

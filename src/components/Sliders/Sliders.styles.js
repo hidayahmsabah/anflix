@@ -51,7 +51,7 @@ export const SliderStyled = styled(Slider)`
     width: 5%;
     transition: all 0.3s ease-out;
 
-    :hover {
+    &:hover {
       opacity: 0.6;
       background: var(--grey);
     }

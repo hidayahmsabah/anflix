@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
     text-align: center;
     margin: 1em auto 0;
 
-    :hover {
+    &:hover {
       color: var(--orange);
     }
   }
