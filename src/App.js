@@ -9,6 +9,7 @@ import AnimeSeries from "./components/AnimeSeries";
 import AnimeMovies from "./components/AnimeMovies";
 import AnimeResult from "./components/AnimeResult";
 import AnimeNew from "./components/AnimeNew";
+import Footer from "./components/Footer";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -47,6 +48,7 @@ function App() {
   };
 
   return (
+    <>
     <Router>
       <Routes>
         <Route
@@ -91,6 +93,8 @@ function App() {
       </Routes>
       <GlobalStyles />
     </Router>
+      <Footer />
+    </>
   );
 }
 

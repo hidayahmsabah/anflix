@@ -5,7 +5,6 @@ import { useParams } from "react-router";
 import { useAnimeFetch } from "../hooks/useAnimeFetch";
 import Top from "./Top";
 // import Loading from "./Loading";
-import Footer from "./Footer";
 // import Wrong from "./Wrong";
 
 const AnimeInd = ({ width, visible, toTop }) => {
@@ -28,7 +27,6 @@ const AnimeInd = ({ width, visible, toTop }) => {
       )}
       <Top visible={visible} toTop={toTop} />
 
-      {(anime || addInfo) && <Footer />}
     </>
   );
 };

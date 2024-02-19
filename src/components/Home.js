@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import Sliders from "./Sliders";
 import { useHomeFetch } from "../hooks/useHomeFetch";
 import { useGenreFetch } from "../hooks/useGenreFetch";
-import Footer from "./Footer";
 import Top from "./Top";
 
 const Home = ({ width, visible, toTop }) => {
@@ -31,7 +30,6 @@ const Home = ({ width, visible, toTop }) => {
         )}
       </main>
       <Top visible={visible} toTop={toTop} />
-      <Footer />
     </>
   );
 };
