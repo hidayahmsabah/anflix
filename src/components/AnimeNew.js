@@ -8,7 +8,7 @@ const AnimeNew = ({ width, visible, toTop }) => {
     <>
       <Navbar width={width} index={3} />
       <New />
-      <Top visible={visible} toTop={toTop} />
+      <Top $visible={visible} toTop={toTop} />
     </>
   );
 };

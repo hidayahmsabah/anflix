@@ -5,8 +5,8 @@ const Circle = ({ perc, rating, bg }) => {
   return (
     <Wrapper className="container" bg={bg}>
       <Container
-        perc={rating === "%" ? (perc / 100) * 360 : (perc / 10) * 360}
-        bg={bg}
+        $perc={rating === "%" ? (perc / 100) * 360 : (perc / 10) * 360}
+        $bg={bg}
       >
         <Content className="circle">
           {perc}

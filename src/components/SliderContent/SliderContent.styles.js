@@ -11,7 +11,7 @@ export const Wrapper = styled(Link)`
       rgba(20, 20, 20, 0) 10%,
       rgba(20, 20, 20, 0.7) 100%
     ),
-    center / cover no-repeat url(${({ cover }) => cover});
+    center / cover no-repeat url(${({ $cover }) => $cover});
   display: flex;
   align-items: flex-end;
   justify-content: center;

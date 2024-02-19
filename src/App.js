@@ -49,50 +49,50 @@ function App() {
 
   return (
     <>
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<Home width={width} visible={visible} toTop={scrollToTop} />}
-        />
-        <Route
-          path="/anflix"
-          element={<Home width={width} visible={visible} toTop={scrollToTop} />}
-        />
-        <Route
-          path="/series"
-          element={
-            <AnimeSeries width={width} visible={visible} toTop={scrollToTop} />
-          }
-        />
-        <Route
-          path="/movies"
-          element={
-            <AnimeMovies width={width} visible={visible} toTop={scrollToTop} />
-          }
-        />
-        <Route
-          path="/new%20popular"
-          element={
-            <AnimeNew width={width} visible={visible} toTop={scrollToTop} />
-          }
-        />
-        <Route
-          path="/:animeId"
-          element={
-            <AnimeInd width={width} visible={visible} toTop={scrollToTop} />
-          }
-        />
-        <Route
-          path="/search/:title"
-          element={
-            <AnimeResult width={width} visible={visible} toTop={scrollToTop} />
-          }
-        />
-        <Route path="/*" element={<NotFound width={width} />} />
-      </Routes>
-      <GlobalStyles />
-    </Router>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home width={width} $visible={visible} toTop={scrollToTop} />}
+          />
+          <Route
+            path="/anflix"
+            element={<Home width={width} $visible={visible} toTop={scrollToTop} />}
+          />
+          <Route
+            path="/series"
+            element={
+              <AnimeSeries width={width} $visible={visible} toTop={scrollToTop} />
+            }
+          />
+          <Route
+            path="/movies"
+            element={
+              <AnimeMovies width={width} $visible={visible} toTop={scrollToTop} />
+            }
+          />
+          <Route
+            path="/new%20popular"
+            element={
+              <AnimeNew width={width} $visible={visible} toTop={scrollToTop} />
+            }
+          />
+          <Route
+            path="/:animeId"
+            element={
+              <AnimeInd width={width} $visible={visible} toTop={scrollToTop} />
+            }
+          />
+          <Route
+            path="/search/:title"
+            element={
+              <AnimeResult width={width} $visible={visible} toTop={scrollToTop} />
+            }
+          />
+          <Route path="/*" element={<NotFound width={width} />} />
+        </Routes>
+        <GlobalStyles />
+      </Router>
       <Footer />
     </>
   );

@@ -21,12 +21,12 @@ export const Container = styled.div`
   align-items: center;
   border: 0.2em solid var(--black);
 
-  background: ${({ perc, bg }) =>
-    perc <= 180
-      ? `linear-gradient(${90 + perc}deg, transparent 50%, var(--black) 50%),
+  background: ${({ $perc, $bg }) =>
+    $perc <= 180
+      ? `linear-gradient(${90 + $perc}deg, transparent 50%, var(--black) 50%),
         linear-gradient(90deg, var(--black) 50%, transparent 50%);`
-      : `linear-gradient(90deg, transparent 50%, ${bg} 50%),
-        linear-gradient(${perc - 90}deg, var(--black) 50%, transparent 50%);`};
+      : `linear-gradient(90deg, transparent 50%, ${$bg} 50%),
+        linear-gradient(${$perc - 90}deg, var(--black) 50%, transparent 50%);`};
 `;
 
 export const Content = styled.div`

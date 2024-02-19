@@ -25,7 +25,7 @@ const AnimeInd = ({ width, visible, toTop }) => {
       {(anime || addInfo) && (
         <AnimeInfo anime={anime} addInfo={addInfo} seiyuu={seiyuu} />
       )}
-      <Top visible={visible} toTop={toTop} />
+      <Top $visible={visible} toTop={toTop} />
 
     </>
   );

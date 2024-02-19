@@ -4,7 +4,7 @@ import { FaAngleUp } from "react-icons/fa";
 
 const Top = ({ visible, toTop }) => {
   return (
-    <Wrapper onClick={toTop} visible={visible}>
+    <Wrapper onClick={toTop} $visible={visible}>
       <Content>
         <FaAngleUp />
       </Content>

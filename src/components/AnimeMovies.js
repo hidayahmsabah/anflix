@@ -9,7 +9,7 @@ const AnimeMovies = ({ width, visible, toTop }) => {
     <>
       <Navbar width={width} index={2} />
       <Series type="movie" />
-      <Top visible={visible} toTop={toTop} />
+      <Top $visible={visible} toTop={toTop} />
     </>
   );
 };

@@ -4,9 +4,9 @@ export const Wrapper = styled.div`
   position: fixed;
   bottom: 5vh;
   right: 3vw;
-  opacity: 0.3;
+  opacity: 0.35;
   transition: opacity 0.5s ease;
-  display: ${({ visible }) => (visible ? "block" : "none")};
+  display: ${({ $visible }) => ($visible ? "block" : "none")};
 
   &:hover {
     opacity: 1;

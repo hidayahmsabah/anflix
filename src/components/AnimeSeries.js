@@ -8,7 +8,7 @@ const AnimeSeries = ({ width, visible, toTop }) => {
     <>
       <Navbar width={width} index={1} />
       <Series type="tv" />
-      <Top toTop={toTop} visible={visible} />
+      <Top toTop={toTop} $visible={visible} />
     </>
   );
 };

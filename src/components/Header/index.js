@@ -32,7 +32,7 @@ const Header = ({ header, width, extra }) => {
 
   return (
     <>
-      <Wrapper header={header}>
+      <Wrapper $header={header}>
         <HeaderContent to={`/${header ? header.mal_id : ""}`}>
           <h3>
             {extra

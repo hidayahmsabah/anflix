@@ -29,7 +29,7 @@ const Home = ({ width, visible, toTop }) => {
           ))
         )}
       </main>
-      <Top visible={visible} toTop={toTop} />
+      <Top $visible={visible} toTop={toTop} />
     </>
   );
 };

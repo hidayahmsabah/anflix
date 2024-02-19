@@ -11,12 +11,12 @@ export const Wrapper = styled.header`
       rgba(20, 20, 20, 0.55) 100%
     ),
     center / cover no-repeat
-      url(${({ header }) =>
-        !header
+      url(${({ $header }) =>
+        !$header
           ? ""
-          : header.banner_image
-          ? header.banner_image
-          : header.cover_image});
+          : $header.banner_image
+          ? $header.banner_image
+          : $header.cover_image});
   transition: all 0.5s ease;
   animation: animateHeroImage 2s;
 
@@ -37,7 +37,7 @@ export const Wrapper = styled.header`
         rgba(20, 20, 20 0.55) 100%
       ),
       bottom 30% center / cover no-repeat
-        url(${({ header }) => (!header ? "" : header.cover_image)});
+        url(${({ $header }) => (!$header ? "" : $header.cover_image)});
   }
 `;
 
