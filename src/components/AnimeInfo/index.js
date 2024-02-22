@@ -1,5 +1,4 @@
 import React from "react";
-import Loading from "../Loading";
 import {
   Wrapper,
   Content,
@@ -7,15 +6,24 @@ import {
   ContentExtra,
   Information,
 } from "./AnimeInfo.styles";
+import Loading from "../Loading";
 import Circle from "../Circle";
+import Back from "../Back";
 import { seasonPeriod } from "../../data/genres";
+// import { useNavigate } from "react-router";
 
 const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
+  // const navigate = useNavigate();
   if (!anime && !addInfo) return <Loading />;
+
+  // function searchGenre(id) {
+  //   navigate(`/search/genre=${id}`);
+  // }
 
   return (
     <Wrapper>
       <Content>
+        <Back />
         <Head>
           <h2>
             {addInfo
@@ -82,7 +90,11 @@ const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
             } cover`}
           ></img>
           <Information
-            color={addInfo && addInfo.rating[0] === "R" ? "red" : "green"}
+            color={
+              addInfo && addInfo.rating && addInfo.rating[0] === "R"
+                ? "red"
+                : "green"
+            }
           >
             <div className="info">
               <div className="rating">
@@ -92,13 +104,13 @@ const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
               <div className="others">
                 {addInfo && (
                   <span>
-                    {addInfo.type && `${addInfo.type}  |  `}
-                    {addInfo.status && `${addInfo.status}  |  `}
-                    {addInfo.episodes && `${addInfo.episodes} episode(s)  |  `}
+                    {addInfo.type && `${addInfo.type}`}
+                    {addInfo.status && `  |  ${addInfo.status}`}
+                    {addInfo.episodes && `  |  ${addInfo.episodes} episode(s)`}
                     {addInfo.premiered
-                      ? addInfo.premiered
+                      ? `  |  ${addInfo.premiered}`
                       : anime &&
-                        `${
+                        `  |  ${
                           Object.keys(seasonPeriod)[anime.season_period][0] +
                           Object.keys(seasonPeriod)
                             [anime.season_period].slice(1)
@@ -110,10 +122,24 @@ const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
                 <ul>
                   {addInfo
                     ? addInfo.genres.map((el, index) => {
-                        return <li key={index}>{el.name}</li>;
+                        return (
+                          <li
+                            key={index}
+                            // onClick={() => searchGenre(el.mal_id)}
+                          >
+                            {el.name}
+                          </li>
+                        );
                       })
                     : anime.genres.map((el, index) => {
-                        return <li key={index}>{el.name}</li>;
+                        return (
+                          <li
+                            key={index}
+                            // onClick={() => searchGenre(el.mal_id)}
+                          >
+                            {el.name}
+                          </li>
+                        );
                       })}
                 </ul>
               </div>

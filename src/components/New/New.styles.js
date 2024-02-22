@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const Tab = styled.div`
   position: sticky;
-  top: max(6.8vh, 40px);
+  top: max(6.8vh, 44px);
   background-color: var(--black);
   z-index: 100;
 
@@ -20,6 +20,7 @@ export const Tab = styled.div`
     justify-content: space-around;
     align-items: center;
     border-bottom: thin solid var(--grey);
+    /* min-height: 44px; */
 
     li {
       color: var(--grey);

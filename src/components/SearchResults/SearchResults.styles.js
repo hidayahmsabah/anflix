@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
   h2 {
     color: var(--white);
-    padding-left: 1em;
+    /* padding-left: 1em; */
 
     i {
       color: var(--orange);
@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
     text-align: center;
     margin: 1em auto 0;
 
-    &:hover {
+    &:hover:not(.search-btn):not(.filterButton) {
       color: var(--orange);
     }
   }

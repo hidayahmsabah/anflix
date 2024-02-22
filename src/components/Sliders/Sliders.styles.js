@@ -6,7 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 export const Main = styled.div`
   padding: 1em 0;
   background: var(--black);
-  animation: Fade 2s;
+  animation: Fade 1s;
+
+  &.no-header {
+    padding-top: 10vh;
+  }
 
   @keyframes Fade {
     from {
@@ -62,15 +66,27 @@ export const SliderStyled = styled(Slider)`
     position: absolute;
     text-align: right;
     right: 3%;
-    top: -15%;
+    top: -10%;
+
+    li {
+      margin: 0 5px 0 0;
+    }
+
+    li button {
+      padding: 0;
+    }
 
     li button::before {
-      color: var(--grey);
+      content: "";
+      background-color: var(--grey);
       opacity: 1;
+      display: inline-block;
+      width: 100%;
+      height: 3px;
     }
 
     li.slick-active button::before {
-      color: var(--orange);
+      background-color: var(--less-orange);
     }
   }
 

@@ -3,7 +3,8 @@ import SliderContent from "../SliderContent";
 import { Main, SliderStyled } from "./Sliders.styles";
 import Loading from "../Loading";
 
-const Sliders = ({ title, list }) => {
+const Sliders = ({ title, list, className }) => {
+  // console.log(className);
   if (!list) return <Loading />;
 
   const slidesLen = list && (list.length > 4 ? 5 : list.length);
@@ -32,7 +33,7 @@ const Sliders = ({ title, list }) => {
           swipeToSlide: true,
           lazyLoad: true,
           slidesToShow: slidesLen > 2 ? 3 : slidesLen,
-          // slidesToScroll: slidesLen > 2 ? 3 : slidesLen,
+          slidesToScroll: slidesLen > 2 ? 3 : slidesLen,
         },
       },
       {
@@ -41,14 +42,14 @@ const Sliders = ({ title, list }) => {
           swipeToSlide: true,
           lazyLoad: true,
           slidesToShow: slidesLen > 1 ? 2 : slidesLen,
-          // slidesToScroll: slidesLen > 1 ? 2 : slidesLen,
+          slidesToScroll: slidesLen > 1 ? 2 : slidesLen,
         },
       },
     ],
   };
 
   return (
-    <Main>
+    <Main className={className}>
       <h2>{title}</h2>
       <SliderStyled {...settings}>
         {list &&

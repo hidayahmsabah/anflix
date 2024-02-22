@@ -10,7 +10,7 @@ import { alphabet } from "../../data/genres";
 const Series = ({ type }) => {
   const [current, setCurrent] = useState(0);
   const [datas, setDatas] = useState([{ key: 1, anime: [], page: 1 }]);
-  const { anime, lastPage, loading, error } = useLetterFetch(
+  const { anime, lastPage, loading, error, request } = useLetterFetch(
     alphabet[current],
     type,
     datas[current].page
@@ -62,18 +62,30 @@ const Series = ({ type }) => {
               );
             })}
           </ul>
-          {loading && <Loading />}
-          {error && <Wrong />}
+
           <GridHolder>
             {datas[current].anime &&
               !error &&
+              request.status === 200 &&
               datas[current].anime.map((el, index) => {
                 return <Grid key={index} anime={el} />;
               })}
           </GridHolder>
         </Content>
-        {anime && datas[current].page < lastPage && !loading && (
-          <button onClick={changePage}>Load More</button>
+        {loading && <Loading />}
+        {error && <Wrong />}
+        {!error &&
+          anime &&
+          datas[current].page < lastPage &&
+          !loading &&
+          request.status === 200 && (
+            <button onClick={changePage}>Load More</button>
+          )}
+        {request.status !== 200 && (
+          <Wrong
+            padding={"0"}
+            text={`Error ${request.status}. ${request.message}. Much apologies for the inconvenience, feel free to try again in a few minutes.`}
+          />
         )}
       </Wrapper>
     </>

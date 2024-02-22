@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import useWindowSize from "./hooks/useWindowSize";
 import { GlobalStyles } from "./GlobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 function App() {
   const [visible, setVisible] = useState(false);
   const [width] = useWindowSize();
+  // const navigate = useNavigate();
 
   // const GetTopAnime = async () => {
   //   const temp = await fetch(`https://api.jikan.moe/v3/anime/45576`).then(
@@ -22,15 +23,33 @@ function App() {
   //   console.log(temp);
   // };
 
-  // useEffect(() => {
-  //   GetTopAnime();
-  // }, []);
+  async function logFetch(url) {
+    try {
+      let first = await fetch(url);
+      // let second = first.status;
+      let third = {
+        status: first.status,
+        message: first.statusText,
+        data: await first.json(),
+      };
+      console.log(third);
+    } catch (err) {
+      console.log("fetch failed", err);
+    }
+  }
 
+  useEffect(() => {
+    //GetTopAnime();
+    logFetch("https://api.jikan.moe/v3/search/anime?q=&letter=z&page=1");
+  }, []);
+
+  // get viewport width for top nav
   useLayoutEffect(() => {
     window.addEventListener("scroll", toggleVisible);
     return () => window.removeEventListener("scroll", toggleVisible);
   }, []);
 
+  // get scroll to show the button to scroll back to top
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300) {

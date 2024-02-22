@@ -43,7 +43,7 @@ export const Content = styled(Link)`
     font-size: 0.9em;
   }
 
-  :hover {
+  :hover span {
     color: var(--orange);
   }
 

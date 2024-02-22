@@ -12,7 +12,7 @@ const fetchingData = {
 
   // anime's seiyuus
   GetAnimeSeiyuu: async (animeId) => {
-    console.log(`${malUrl}/anime/${animeId}/characters_staff`);
+    // console.log(`${malUrl}/anime/${animeId}/characters_staff`);
     return await (
       await (await fetch(`${malUrl}/anime/${animeId}/characters_staff`)).json()
     ).characters;
@@ -26,6 +26,22 @@ const fetchingData = {
     ).json();
   },
 
+  GetSearchAnime2: async (searchTerm, page) => {
+    let response = await fetch(
+      `${malUrl}/search/anime?q=${searchTerm}&page=${page}`
+    );
+    let resultObj = {
+      status: response.status,
+      message: response.statusText,
+      data: await response.json(),
+    };
+
+    return resultObj;
+    // return await (
+    //   await fetch(`${malUrl}/search/anime?q=${searchTerm}&page=${page}`)
+    // ).json();
+  },
+
   GetSearchLetter: async (letter, type, page) => {
     // console.log(`${malUrl}/search/anime?q=${searchTerm}&page=${page}`);
     return await (
@@ -33,6 +49,18 @@ const fetchingData = {
         `${malUrl}/search/anime?q=&letter=${letter}&type=${type}&page=${page}`
       )
     ).json();
+  },
+
+  GetSearchLetter2: async (letter, type, page) => {
+    let response = await fetch(
+      `${malUrl}/search/anime?q=&letter=${letter}&type=${type}&page=${page}`
+    );
+    let resultObj = {
+      status: response.status,
+      message: response.statusText,
+      data: await response.json(),
+    };
+    return resultObj;
   },
 
   GetNewAnime: async (subtype) => {

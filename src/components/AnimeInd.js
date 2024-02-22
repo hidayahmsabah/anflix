@@ -14,16 +14,15 @@ const AnimeInd = ({ width, $visible }) => {
   return (
     <>
       <Navbar width={width} />
-      {/* {error && (
-        <Wrong
-          text={
-            "Oops, it appears either Anilist or MyAnimeList has trouble finding this anime"
-          }
-        />
-      )} */}
+      {/* <Back /> */}
       {/* {!anime && !addInfo && <Loading />} */}
       {(anime || addInfo) && (
-        <AnimeInfo anime={anime} addInfo={addInfo} seiyuu={seiyuu} />
+        <AnimeInfo
+          anime={anime}
+          addInfo={addInfo}
+          seiyuu={seiyuu}
+          // backFn={backFn}
+        />
       )}
       <Top $visible={$visible} />
 
