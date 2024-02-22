@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "../Filter";
 import Loading from "../Loading";
 import Grid from "../Grid";
