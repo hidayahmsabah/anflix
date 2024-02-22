@@ -14,13 +14,26 @@ const Home = ({ width, visible, toTop }) => {
   return (
     <>
       <Navbar width={width} />
-      <Header header={random && random} extra={addInfo} width={width} />
+      {random && <Header header={random} extra={addInfo} width={width} />}
       <main>
-        <Sliders title="Top Animes" list={top} />
+        <Sliders
+          title="Top Animes"
+          list={top}
+          className={!random && "no-header"}
+        />
+        {/* {allGenres && (
+          allGenres.length === 5 &&
+          allGenres.map((el, index) => (
+            <Sliders
+              key={index}
+              title={`${el.genre} Anime`}
+              list={el.results}
+            />
+          ))
+        )} */}
         {!allGenres ? (
           <div>Something went wrong</div>
         ) : (
-          allGenres.length === 5 &&
           allGenres.map((el, index) => (
             <Sliders
               key={index}
@@ -31,7 +44,7 @@ const Home = ({ width, visible, toTop }) => {
         )}
       </main>
       <Top visible={visible} toTop={toTop} />
-      <Footer />
+      {random && <Footer />}
     </>
   );
 };

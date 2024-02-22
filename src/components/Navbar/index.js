@@ -1,5 +1,6 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { useParams } from "react-router";
 import {
   Wrapper,
   Logo,
@@ -10,6 +11,7 @@ import {
   BrowseArrow,
   SearchIcon,
   Input,
+  Cancel,
 } from "./Navbar.styles";
 import BrowseBar from "../BrowseBar";
 
@@ -20,6 +22,7 @@ const Navbar = ({ index, width }) => {
   const searchBarRef = useRef();
   const browseRef = useRef();
   const inputRef = useRef();
+  // const title = useParams();
   const navigate = useNavigate();
 
   window.addEventListener("click", (e) => {
@@ -55,10 +58,18 @@ const Navbar = ({ index, width }) => {
     browse ? setBrowse(false) : setBrowse(true);
   }
 
+  function cancelSearch() {
+    setSearch(!search);
+  }
+
   return (
-    <Wrapper className={`${navScroll && "scroll"}`}>
+    <Wrapper className={`${search && "darken"} ${navScroll && "scroll"}`}>
       <Logo to="/">{width > 400 ? "AnFlix" : "AF"}</Logo>
-      <Browse ref={browseRef} onClick={(e) => browseOpen(e)}>
+      <Browse
+        ref={browseRef}
+        onClick={(e) => browseOpen(e)}
+        className="browsebar"
+      >
         Browse
         <BrowseArrow />
         <BrowseBar browse={browse} index={index} />
@@ -74,15 +85,19 @@ const Navbar = ({ index, width }) => {
           <Link to="/new%20popular">New & Popular</Link>
         </List>
       </Content>
-      <SearchBar ref={searchBarRef} className={`${search && "active"}`}>
+      <SearchBar
+        ref={searchBarRef}
+        className={`${search && "active"} searchbar`}
+      >
         <SearchIcon className="searchIcon" />
         <Input
           type="text"
           ref={inputRef}
           className={`${search && "active"}`}
           onKeyUp={(e) => searchEnter(e)}
-          placeholder="3 Letters Min"
+          placeholder="3 Characters Minimum"
         />
+        <Cancel className={search && "active"} onClick={cancelSearch} />
       </SearchBar>
     </Wrapper>
   );

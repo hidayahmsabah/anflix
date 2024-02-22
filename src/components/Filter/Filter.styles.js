@@ -6,22 +6,32 @@ export const Wrapper = styled.div`
   padding: 1em 0;
   color: var(--white);
 
-  .filterButton {
-    cursor: pointer;
-    background: var(--black);
-    border: none;
-    position: absolute;
-    right: 1em;
-    margin-bottom: 2em;
-    color: var(--white);
-    font-size: 0.9em;
+  .filter-btn {
+    /* background-color: teal; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .filterButton {
+      background: var(--black);
+      border: none;
+      color: var(--white);
+      font-size: 0.9em;
+      margin: 0;
+      transition: all 0.5s ease;
+      cursor: pointer;
+
+      &.active {
+        color: var(--orange);
+      }
+    }
   }
 `;
 
 export const FilterLogo = styled(FaFilter)`
   color: var(--white);
   margin-left: 1em;
-  transition: all 0.5s ease;
+  transition: color 0.5s ease;
 
   &.active {
     color: var(--orange);
@@ -37,7 +47,7 @@ export const Content = styled.form`
   border-style: solid;
   border-radius: 0.5em;
   padding: 1em;
-  margin-top: 2em;
+  /* margin-top: 4em; */
   display: none;
   transition: all 0.5s ease;
 
@@ -54,27 +64,35 @@ export const Content = styled.form`
     text-align: left;
     /* width: 250px; */
     flex: 1 200px;
+
+    input {
+      font-size: 16px;
+    }
   }
 
   /* .input:first-child{
         flex: 4 200px;
     } */
 
-  button {
+  .search-btn {
     display: block;
     width: 150px;
     height: 38px;
     border-radius: 4px;
-    background-color: var(--orange);
-    color: var(--white);
-    /* font-weight: bold; */
+    background-color: var(--white);
+    color: var(--black);
+    font-weight: bold;
     font-size: 0.9em;
     letter-spacing: 0.1em;
-    align-self: end;
+    align-self: center;
   }
 
   label {
-    padding-bottom: 1em;
+    padding-bottom: 0.5em;
+
+    + * {
+      margin-bottom: 1em;
+    }
   }
 
   #title {
@@ -91,11 +109,11 @@ export const Content = styled.form`
     background: var(--grey);
     max-width: 100%;
 
-    div[role="button"] {
+    /* div[role="button"] {
       :hover {
         background-color: rgba(255, 123, 0, 0.7);
       }
-    }
+    } */
 
     > div::first-child {
       border: thin solid var(--white);

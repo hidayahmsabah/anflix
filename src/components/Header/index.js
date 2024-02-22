@@ -13,29 +13,36 @@ const Header = ({ header, width, extra }) => {
     }
   }
 
-  function plotWords() {
-    if (extra && paraRef && extra.synopsis) {
-      const len = extra.synopsis.length;
-      if (width < 480) {
+  function plotWords(source) {
+    if (paraRef && paraRef.current) {
+      // console.log(paraRef);
+      if (!source) {
         paraRef.current.innerHTML = "";
-      } else if (width < 768) {
-        paraRef.current.innerHTML = addDots(len, extra.synopsis.slice(0, 250));
       } else {
-        paraRef.current.innerHTML = addDots(len, extra.synopsis.slice(0, 500));
+        const len = source.length;
+        if (width < 480) {
+          paraRef.current.innerHTML = "";
+        } else if (width < 768) {
+          paraRef.current.innerHTML = addDots(len, source.slice(0, 250));
+        } else {
+          paraRef.current.innerHTML = addDots(len, source.slice(0, 500));
+        }
       }
-    } else {
-      return "";
     }
   }
 
-  plotWords();
+  plotWords(
+    extra ? extra.synopsis : header.descriptions.en && header.descriptions.en
+  );
 
   return (
     <>
       <Wrapper header={header}>
         <HeaderContent to={`/${header ? header.mal_id : ""}`}>
           <h3>
-            {extra
+            {header.titles.en
+              ? header.titles.en
+              : extra
               ? extra.title_english
                 ? extra.title_english
                 : extra.title

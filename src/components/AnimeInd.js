@@ -4,9 +4,8 @@ import AnimeInfo from "./AnimeInfo";
 import { useParams } from "react-router";
 import { useAnimeFetch } from "../hooks/useAnimeFetch";
 import Top from "./Top";
-// import Loading from "./Loading";
 import Footer from "./Footer";
-// import Wrong from "./Wrong";
+// import Back from "./Back";
 
 const AnimeInd = ({ width, visible, toTop }) => {
   const { animeId } = useParams();
@@ -15,16 +14,15 @@ const AnimeInd = ({ width, visible, toTop }) => {
   return (
     <>
       <Navbar width={width} />
-      {/* {error && (
-        <Wrong
-          text={
-            "Oops, it appears either Anilist or MyAnimeList has trouble finding this anime"
-          }
-        />
-      )} */}
+      {/* <Back /> */}
       {/* {!anime && !addInfo && <Loading />} */}
       {(anime || addInfo) && (
-        <AnimeInfo anime={anime} addInfo={addInfo} seiyuu={seiyuu} />
+        <AnimeInfo
+          anime={anime}
+          addInfo={addInfo}
+          seiyuu={seiyuu}
+          // backFn={backFn}
+        />
       )}
       <Top visible={visible} toTop={toTop} />
 

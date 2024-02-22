@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   opacity: 0.3;
   transition: opacity 0.5s ease;
   display: ${({ visible }) => (visible ? "block" : "none")};
+  z-index: 100;
 
   :hover {
     opacity: 1;

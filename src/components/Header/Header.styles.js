@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 export const Wrapper = styled.header`
   /* margin-top: -7vh; */
-  height: 500px;
+  height: 600px;
   position: relative;
   background: linear-gradient(
       to top,
       rgba(20, 20, 20, 0) 40%,
       rgba(20, 20, 20, 0.55) 100%
     ),
-    center / cover no-repeat
+    50% 40% / cover no-repeat
       url(${({ header }) =>
         !header
           ? ""
@@ -30,13 +30,13 @@ export const Wrapper = styled.header`
   }
 
   @media screen and (max-width: 480px) {
-    height: 400px;
+    height: 500px;
     background: linear-gradient(
         to top,
         rgba(20, 20, 20, 0) 40%,
         rgba(20, 20, 20 0.55) 100%
       ),
-      bottom 30% center / cover no-repeat
+      50% 40% / cover no-repeat
         url(${({ header }) => (!header ? "" : header.cover_image)});
   }
 `;

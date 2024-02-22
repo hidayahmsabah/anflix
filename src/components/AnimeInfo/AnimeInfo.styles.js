@@ -127,19 +127,21 @@ export const Information = styled.div`
   span {
     display: block;
     font-size: 0.9em;
-    /* color: var(--less-orange); */
+    text-align: right;
   }
 
   ul {
     padding-top: 0.5em;
     list-style-type: none;
     display: flex;
+    flex-flow: row wrap;
     justify-content: flex-end;
 
     li {
       font-size: 0.9em;
-      padding-right: 1em;
+      padding-left: 1em;
       color: var(--less-orange);
+      /* cursor: pointer; */
     }
   }
 
@@ -160,6 +162,7 @@ export const Information = styled.div`
 
     p {
       text-align: left;
+      font-size: 0.95em;
     }
   }
 
@@ -172,14 +175,7 @@ export const Information = styled.div`
       font-size: 1.5em;
     }
 
-    span {
-      font-size: 0.7em;
+    span, ul > li {
+      font-size: 0.8em;
     }
-
-    ul {
-      li {
-        font-size: 0.7em;
-      }
-    }
-  }
 `;

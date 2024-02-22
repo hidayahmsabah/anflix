@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaSearch, FaCaretDown } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 export const Wrapper = styled.nav`
   position: fixed;
@@ -13,17 +14,30 @@ export const Wrapper = styled.nav`
   justify-content: flex-start;
   height: 7vh;
   transition: all 0.1s ease;
-  min-height: 40px;
+  min-height: 44px;
 
   &.scroll {
     background-color: var(--black);
   }
+
+  @media screen and (max-width: 450px) {
+    &.darken *:not(.searchbar):not(.searchbar *) {
+      display: none;
+    }
+  }
+
+  /* @media screen and (max-width: 450px) {
+    &.darken .browsebar {
+      display: none;
+    }
+  } */
 `;
 
 export const Logo = styled(Link)`
   color: var(--white);
   font-size: 1.5rem;
-  margin: 0 2em;
+  //margin: 0 2em;
+  margin-left: 2em;
   font-weight: bold;
   flex: 3;
   transition: all 0.5s ease;
@@ -125,7 +139,8 @@ export const SearchBar = styled.div`
     padding: 0 1em;
 
     &.active {
-      margin-left: -3em;
+      flex-grow: 1;
+      /* margin-right: 1em; */
     }
   }
 `;
@@ -148,23 +163,60 @@ export const SearchIcon = styled(FaSearch)`
 `;
 export const Input = styled.input`
   width: 0;
+  height: 70%;
+  max-height: 44px;
+  background: var(--grey);
   border: 0;
   outline: none;
+  text-align: center;
+  font-size: 14px;
+
   transition: all 0.5s ease-in-out;
   color: var(--white);
 
   &.active {
-    width: 80%;
-    height: 1.8em;
+    flex: auto;
+    min-width: 150px;
+    width: 90%;
     border-radius: 1.5em;
-    background: var(--grey);
-    padding-left: 1em;
-    margin-right: -1em;
+    /* padding-left: 1em; */
+    margin: 0 -1em 0 0.5em;
   }
 
   @media screen and (max-width: 450px) {
     &.active {
-      width: 60%;
+      height: 70%;
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 325px) {
+    &.active {
+      text-align: left;
+      padding-left: 1.5em;
+    }
+  }
+
+  @media screen and (max-width: 280px) {
+    &.active {
+      padding-left: 1em;
+    }
+  }
+`;
+
+export const Cancel = styled(MdCancel)`
+  display: none;
+  font-size: 1.5em;
+  /* padding-right: 0.2em; */
+  position: relative;
+  right: 1em;
+  /* padding: 0.2em; */
+  cursor: pointer;
+
+  @media screen and (max-width: 450px) {
+    &.active {
+      display: block;
+      color: white;
     }
   }
 `;
