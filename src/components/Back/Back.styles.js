@@ -35,6 +35,7 @@ export const BackButton = styled.button`
   align-items: center;
   transition: all 0.2s ease;
   margin-bottom: 4em;
+  color: var(--black);
 
   &:hover{
     cursor: pointer;
