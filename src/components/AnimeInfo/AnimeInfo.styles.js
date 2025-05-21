@@ -49,7 +49,7 @@ export const Head = styled.div`
     .sources {
       display: block;
       text-align: center;
-      font-size: 0.6em;
+      font-size: 0.7em;
       align-self: flex-end;
       transition: all 0.5s ease;
       text-decoration: none;
@@ -84,6 +84,10 @@ export const Head = styled.div`
 
     .scores {
       font-size: 0.9rem;
+
+      .sources {
+        font-size: 0.9em;
+      }
     }
   }
 `;
@@ -187,5 +191,9 @@ export const Information = styled.div`
 
     span, ul > li {
       font-size: 0.8em;
+    }
+
+    .mal_genres {
+      font-size: 0.9em;
     }
 `;

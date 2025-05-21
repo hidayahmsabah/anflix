@@ -97,7 +97,7 @@ const Filter = ({ searchParams, scrollToTop }) => {
     let urlParams = inputValue ? selectedParams + inputValue : selectedParams.slice(0, selectedParams.length - 1)
     console.log("urlParams", urlParams)
     Object.keys(others).length > 0 ? navigate(`/search/${urlParams}`, { state: { params: stateParams }}) : setEmptyFilter(true);
-
+    setFilter(!(Object.keys(others).length > 0))
     scrollToTop()
   }
 

@@ -51,7 +51,7 @@ export const Logo = styled(Link)`
   @media screen and (max-width: 450px) {
     flex: 2;
     margin: 0 1em;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   @media screen and (min-width: 767px) {
@@ -110,7 +110,7 @@ export const Browse = styled.span`
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 0.9rem;
+    margin-right: 5px;
   }
 `;
 
@@ -157,9 +157,6 @@ export const SearchIcon = styled(FaSearch)`
     text-shadow: 0px 1px 4px var(--grey);
   }
 
-  @media screen and (max-width: 768px) {
-    font-size: 1em;
-  }
 `;
 export const Input = styled.input`
   width: 0;

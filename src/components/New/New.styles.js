@@ -49,6 +49,7 @@ export const Tab = styled.div`
 
     @media screen and (max-width: 768px) {
       justify-content: center;
+      margin-right: 0;
     }
   }
 

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   background: var(--black);
 
   @media screen and (max-width: 768px) {
-    padding-top: 5vh;
+    padding: 20vh 5vh 0;
   }
 `;
 

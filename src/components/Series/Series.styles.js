@@ -22,12 +22,6 @@ export const Wrapper = styled.div`
       color: var(--orange);
     }
   }
-
-  @media screen and (max-width: 450px) {
-    .load-more {
-      font-size: 0.7em;
-    }
-  }
 `;
 
 export const Content = styled.div`
