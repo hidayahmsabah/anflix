@@ -14,30 +14,6 @@ import Footer from "./components/Footer";
 function App() {
   const [visible, setVisible] = useState(false);
   const [width] = useWindowSize();
-  // const navigate = useNavigate();
-
-  // const GetTopAnime = async () => {
-  //   const temp = await fetch(`https://api.jikan.moe/v3/anime/45576`).then(
-  //     (res) => res.json()
-  //   );
-  //   console.log(temp);
-  // };
-
-  async function logFetch(url) {
-    try {
-      let first = await fetch(url);
-      // let second = first.status;
-      let third = {
-        status: first.status,
-        message: first.statusText,
-        data: await first.json(),
-      };
-      console.log(third);
-    } catch (err) {
-      console.log("fetch failed", err);
-    }
-  }
-
 
   // get viewport width for top nav
   useLayoutEffect(() => {

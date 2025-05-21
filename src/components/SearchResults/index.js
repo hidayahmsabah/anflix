@@ -43,7 +43,7 @@ const SearchResults = () => {
     <Wrapper>
       <Filter searchParams={searchParams} />
       {
-        (!loading || searchParams && searchParams.page > 1) &&
+        (!loading || (searchParams && searchParams.page > 1)) &&
         <h2>
           {`${total}`} results found for search {criteria.map((el, id) => <span className="criteria" key={id}>{el}</span>)}
         </h2>

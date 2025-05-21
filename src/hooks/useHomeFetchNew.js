@@ -9,53 +9,53 @@ const TopAnimesQuery = loader("../queries/graphql/TopAnimes.graphql");
 export function useHomeFetchNew() {
   const [top, setTop] = useState();
   const [random, setRandom] = useState();
-  const [newSeasonAnime, setNewSeasonAnime] = useState()
-  const [addInfo, setAddInfo] = useState();
+  // const [newSeasonAnime, setNewSeasonAnime] = useState()
+  // const [addInfo, setAddInfo] = useState();
   const [allGenres, setAllGenres] = useState([])
-  const { genredAnimes, error } = useGenreFetch()
+  const { genredAnimes } = useGenreFetch()
   const topRef = useRef(null)
   const randomRef = useRef(null)
-  const newAnime = useRef(null)
+  // const newAnime = useRef(null)
 
   console.log("useHomeFetchNew genredAnimes", genredAnimes)
 
   useEffect(() => {
 
     // get header anime
-    const fetchNewAnime = async () => {
+    // const fetchNewAnime = async () => {
 
-      if (newAnime.current) {
-        console.log("useHomeFetchNew newAnime.current if", newAnime)
+    //   if (newAnime.current) {
+    //     console.log("useHomeFetchNew newAnime.current if", newAnime)
 
-        newSeasonAnime(newAnime.current);
-      } else {
+    //     newSeasonAnime(newAnime.current);
+    //   } else {
 
-        console.log("useHomeFetchNew newAnime.current else", newAnime)
+    //     console.log("useHomeFetchNew newAnime.current else", newAnime)
 
-        try{
-          let newAnime = await fetchingData.GetNewSeasonAnime();
+    //     try{
+    //       let newAnime = await fetchingData.GetNewSeasonAnime();
   
-          console.log("useHomeFetchNew this is random Anime", newAnime)
+    //       console.log("useHomeFetchNew this is random Anime", newAnime)
   
-          while (!newAnime?.data?.images?.webp?.large_image_url) {
-            newAnime = await fetchingData.GetNewSeasonAnime();
-          }
+    //       while (!newAnime?.data?.images?.webp?.large_image_url) {
+    //         newAnime = await fetchingData.GetNewSeasonAnime();
+    //       }
     
-          sessionStorage.setItem("newAnime", JSON.stringify(newAnime.data))
+    //       sessionStorage.setItem("newAnime", JSON.stringify(newAnime.data))
 
-          newSeasonAnime(newAnime.data);
-          newAnime.current = newAnime.data
+    //       newSeasonAnime(newAnime.data);
+    //       newAnime.current = newAnime.data
 
-          console.log("useHomeFetchNew newAnime after newSeasonAnime", newAnime)
+    //       console.log("useHomeFetchNew newAnime after newSeasonAnime", newAnime)
   
-        } catch(e) {
+    //     } catch(e) {
           
-          console.log("useHomeFetchNew error fetching this season Anime", e);
-          newSeasonAnime({ error: true })
+    //       console.log("useHomeFetchNew error fetching this season Anime", e);
+    //       newSeasonAnime({ error: true })
   
-        }
-      }
-    };
+    //     }
+    //   }
+    // };
 
     const fetchRandAnime = async () => {
 
@@ -158,5 +158,5 @@ export function useHomeFetchNew() {
     if (genredAnimes?.length > 0) setAllGenres(genredAnimes) 
   }, [genredAnimes])
 
-  return { random, top, allGenres, addInfo };
+  return { random, top, allGenres };
 }

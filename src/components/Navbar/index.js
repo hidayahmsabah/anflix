@@ -12,14 +12,13 @@ import {
   SearchIcon,
   Input,
   Cancel,
-  InputError,
 } from "./Navbar.styles";
 import BrowseBar from "../BrowseBar";
 
 const Navbar = ({ index, width }) => {
   const [search, setSearch] = useState(false);
   const [browse, setBrowse] = useState(false);
-  const [error, setError] = useState(false)
+  // const [error, setError] = useState(false)
   const [navScroll, setNavScroll] = useState(false);
   const searchBarRef = useRef();
   const browseRef = useRef();
@@ -52,11 +51,11 @@ const Navbar = ({ index, width }) => {
       if (value.length > 2) {
         navigate(`/search/${value}`, { state: { params: { q: value }}});
         inputRef.current.value = "";
-      } else {
-        setError(true)
+      // } else {
+        // setError(true)
       }
-    } else {
-      setError(false)
+    // } else {
+    //   setError(false)
     }
   }
 

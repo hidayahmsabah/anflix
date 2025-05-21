@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
-import makeAnimated from "react-select/animated";
+// import makeAnimated from "react-select/animated";
 import { useNavigate } from "react-router";
 import { getMALGenre, updateMALGenre, typeMal, statusMAL, ratingMAL } from "../../data/genres";
 import { Wrapper, FilterLogo, ErrorLogo, Content } from "./Filter.styles";
@@ -27,7 +27,7 @@ const Filter = ({ searchParams }) => {
 
   const navigate = useNavigate();
 
-  const animatedComponents = makeAnimated();
+  // const animatedComponents = makeAnimated();
 
   // easily map to create Select comp
   const optionsGenre = {
