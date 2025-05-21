@@ -12,6 +12,7 @@ const Series = ({ type }) => {
   const currentLocation = useLocation().pathname
   const state = useLocation().state
 
+  const [showLoading, setShowLoading] = useState(true)
   const [current, setCurrent] = useState(state ? state.mark : 0);
   const [datas, setDatas] = useState(() => {
     const arr = [];
@@ -33,9 +34,11 @@ const Series = ({ type }) => {
     } else {
       setDatas(update(datas, { [current]: { anime: { $set: anime } } }));
     }
+    setShowLoading(loading)
   }, [anime]);
 
   function changeLetter(index) {
+    setShowLoading(true)
     if (!datas[index]) {
       toTop()
       const newAlpha = { key: index, anime: [], page: 1 };
@@ -53,6 +56,7 @@ const Series = ({ type }) => {
   }
 
   function changePage() {
+    setShowLoading(true)
     const prevPage = datas[current].page;
     setDatas(update(datas, { [current]: { page: { $set: prevPage + 1 } } }));
   }
@@ -78,8 +82,7 @@ const Series = ({ type }) => {
                 })}
               </ul>
               {
-                loading ? <Loading /> :
-                <>
+                showLoading && datas[current].page === 1 ? <Loading/> :    
                   <GridHolder>
                     {datas[current].anime &&
                       !error &&
@@ -87,10 +90,12 @@ const Series = ({ type }) => {
                         return <Grid key={index} anime={el} prev={{ location: currentLocation, mark: current }}/>;
                       })}
                   </GridHolder>
-                  {anime && datas[current].page < lastPage && (
-                    <button className="load-more" onClick={changePage}>Load More</button>
-                  )}
-                </>
+              }
+              { 
+                showLoading ? <Loading /> : 
+                anime && datas[current].page < lastPage && (
+                  <button className="load-more" onClick={changePage}>Load More</button>
+                )
               }
             </>
           }
