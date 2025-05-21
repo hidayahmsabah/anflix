@@ -38,10 +38,16 @@ const SearchResults = () => {
     setSearchParams({...searchParams, page: searchParams.page + 1});
   }
 
+  function toTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <Wrapper>
-      <Filter searchParams={searchParams} />
+      <Filter searchParams={searchParams} scrollToTop={toTop}/>
       {
         (!loading || (searchParams && searchParams.page > 1)) &&
         <h2>

@@ -6,7 +6,7 @@ import { getMALGenre, updateMALGenre, typeMal, statusMAL, ratingMAL } from "../.
 import { Wrapper, FilterLogo, ErrorLogo, Content } from "./Filter.styles";
 import fetchingData from "../../API";
 
-const Filter = ({ searchParams }) => {
+const Filter = ({ searchParams, scrollToTop }) => {
 
   const [filter, setFilter] = useState(false);
   const [stateParams, setStateParams] = useState(null)
@@ -97,6 +97,8 @@ const Filter = ({ searchParams }) => {
     let urlParams = inputValue ? selectedParams + inputValue : selectedParams.slice(0, selectedParams.length - 1)
     console.log("urlParams", urlParams)
     Object.keys(others).length > 0 ? navigate(`/search/${urlParams}`, { state: { params: stateParams }}) : setEmptyFilter(true);
+
+    scrollToTop()
   }
 
   const handleChange = (selected, filterType, optionObj) => {
