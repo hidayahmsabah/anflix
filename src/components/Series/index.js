@@ -35,10 +35,6 @@ const Series = ({ type }) => {
     }
   }, [anime]);
 
-  useEffect(() => {
-    toTop()
-  }, [])
-
   function changeLetter(index) {
     if (!datas[index]) {
       toTop()

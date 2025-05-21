@@ -27,11 +27,6 @@ const New = () => {
     });
   }
 
-  useEffect(() => {  
-    toTop()
-  }, [])
-  
-
   function changeTabs(index) {
     toTop()
     index !== current && setCurrent(index);

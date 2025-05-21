@@ -21,17 +21,6 @@ const AnimeInfo = ({ anime, seiyuu }) => {
     return newString
   }
 
-  function toTop() {
-    window.scrollTo({
-      top: 0,
-      // behavior: "smooth",
-    });
-  }
-
-  useEffect(() => {
-    toTop()
-  }, [])
-
   if (!anime) return <Loading />;
   return (
     <Wrapper>

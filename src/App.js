@@ -2,6 +2,7 @@ import { useState, useLayoutEffect } from "react";
 import useWindowSize from "./hooks/useWindowSize";
 import { GlobalStyles } from "./GlobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./scrollToTop";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import AnimeInd from "./components/AnimeInd";
@@ -34,6 +35,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
