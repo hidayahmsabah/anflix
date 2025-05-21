@@ -77,7 +77,7 @@ export const SliderStyled = styled(Slider)`
     position: absolute;
     text-align: right;
     right: 3%;
-    top: -10%;
+    top: -5%;
 
     li {
       margin: 0 5px 0 0;
