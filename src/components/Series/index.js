@@ -65,33 +65,37 @@ const Series = ({ type }) => {
     <>
       <Wrapper>
         <Content>
-          <ul>
-            {alphabet.map((el, index) => {
-              return (
-                <li
-                  key={index}
-                  className={`${index === current && "active"}`}
-                  onClick={() => changeLetter(index)}
-                >
-                  {el.toUpperCase()}
-                </li>
-              );
-            })}
-          </ul>
           {
-            loading ? <Loading /> :
             error ? <Wrong /> :
             <>
-              <GridHolder>
-                {datas[current].anime &&
-                  !error &&
-                  datas[current].anime.map((el, index) => {
-                    return <Grid key={index} anime={el} prev={{ location: currentLocation, mark: current }}/>;
-                  })}
-              </GridHolder>
-              {anime && datas[current].page < lastPage && (
-                <button className="load-more" onClick={changePage}>Load More</button>
-              )}
+              <ul>
+                {alphabet.map((el, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={`${index === current && "active"}`}
+                      onClick={() => changeLetter(index)}
+                    >
+                      {el.toUpperCase()}
+                    </li>
+                  );
+                })}
+              </ul>
+              {
+                loading ? <Loading /> :
+                <>
+                  <GridHolder>
+                    {datas[current].anime &&
+                      !error &&
+                      datas[current].anime.map((el, index) => {
+                        return <Grid key={index} anime={el} prev={{ location: currentLocation, mark: current }}/>;
+                      })}
+                  </GridHolder>
+                  {anime && datas[current].page < lastPage && (
+                    <button className="load-more" onClick={changePage}>Load More</button>
+                  )}
+                </>
+              }
             </>
           }
         </Content>
