@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import useWindowSize from "./hooks/useWindowSize";
 import { GlobalStyles } from "./GlobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -38,10 +38,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    //GetTopAnime();
-    logFetch("https://api.jikan.moe/v3/search/anime?q=&letter=z&page=1");
-  }, []);
 
   // get viewport width for top nav
   useLayoutEffect(() => {

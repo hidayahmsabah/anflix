@@ -1,4 +1,3 @@
-import React from "react";
 import { Wrapper, Content } from "./SliderContent.styles";
 
 const SliderContent = ({ text, cover, id }) => {

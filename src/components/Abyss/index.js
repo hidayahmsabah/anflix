@@ -1,15 +1,17 @@
-import React from "react";
-import Back from "../Back";
 import { Content, Wrapper } from "./Abyss.styles";
+import Back from "../Back";
 import confused from "../../icons/confused.png";
 
 const Abyss = () => {
+
   return (
     <Wrapper>
       <Content>
-        Oops it appears you have landed in the land of the abyss. Fret not.
+        <Back/>
+
+        <h4>Oops it appears you have landed in the land of the abyss. Fret not.</h4>
         <p>
-          Try going <Back />
+          Try going back
         </p>
         <div id="img-div">
           <img src={confused} alt="Icon of a confused man" />

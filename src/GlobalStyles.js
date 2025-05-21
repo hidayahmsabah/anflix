@@ -26,11 +26,18 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     html{
-        background-color: var(---black);
+        background-color: var(--black);
+    }
+
+    #root{
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     main{
         overflow-x: hidden;
+        flex-grow: 1;
     }
 
     ::-webkit-scrollbar {

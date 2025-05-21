@@ -1,6 +1,4 @@
-import React from "react";
 import { Wrapper, LogoML, LogoAL } from "./Footer.styles";
-// import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (

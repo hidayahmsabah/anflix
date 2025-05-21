@@ -3,31 +3,20 @@ import { Link } from "react-router-dom";
 
 export const Wrapper = styled.header`
   /* margin-top: -7vh; */
+  flex-grow: 1;
   height: 600px;
   position: relative;
   background: linear-gradient(
       to top,
       rgba(20, 20, 20, 0) 40%,
-      rgba(20, 20, 20, 0.55) 100%
+      rgba(20, 20, 20, 1) 100%
     ),
     50% 40% / cover no-repeat
       url(${({ $header }) =>
         !$header
           ? ""
-          : $header.banner_image
-          ? $header.banner_image
-          : $header.cover_image});
+          : $header});
   transition: all 0.5s ease;
-  animation: animateHeroImage 2s;
-
-  @keyframes animateHeroImage {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 
   @media screen and (max-width: 480px) {
     height: 500px;
@@ -37,7 +26,7 @@ export const Wrapper = styled.header`
         rgba(20, 20, 20 0.55) 100%
       ),
       50% 40% / cover no-repeat
-        url(${({ $header }) => (!$header ? "" : $header.cover_image)});
+        url(${({ $header }) => (!$header ? "" : $header)});
   }
 `;
 
@@ -49,7 +38,7 @@ export const HeaderContent = styled(Link)`
     rgba(20, 20, 20, 0) 5%,
     rgba(20, 20, 20, 1) 100%
   );
-  height: 50%;
+  height: 80%;
   width: 100%;
   position: absolute;
   bottom: 0;

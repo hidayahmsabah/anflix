@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 import Grid from "../Grid";
 import Loading from "../Loading";
 import Wrong from "../Wrong";
@@ -8,9 +9,16 @@ import { Content, GridHolder, Wrapper } from "./Series.styles";
 import { alphabet } from "../../data/genres";
 
 const Series = ({ type }) => {
-  const [current, setCurrent] = useState(0);
-  const [datas, setDatas] = useState([{ key: 1, anime: [], page: 1 }]);
-  const { anime, lastPage, loading, error, request } = useLetterFetch(
+  const currentLocation = useLocation().pathname
+  const state = useLocation().state
+
+  const [current, setCurrent] = useState(state ? state.mark : 0);
+  const [datas, setDatas] = useState(() => {
+    const arr = [];
+    arr[current] = { key: current, anime: [], page: 1 };
+    return arr;
+  });
+  const { anime, lastPage, loading, error } = useLetterFetch(
     alphabet[current],
     type,
     datas[current].page
@@ -27,8 +35,13 @@ const Series = ({ type }) => {
     }
   }, [anime]);
 
+  useEffect(() => {
+    toTop()
+  }, [])
+
   function changeLetter(index) {
     if (!datas[index]) {
+      toTop()
       const newAlpha = { key: index, anime: [], page: 1 };
       const newData = update(datas, { [index]: { $set: newAlpha } });
       setDatas(newData);
@@ -36,14 +49,17 @@ const Series = ({ type }) => {
     setCurrent(index);
   }
 
+  function toTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   function changePage() {
     const prevPage = datas[current].page;
     setDatas(update(datas, { [current]: { page: { $set: prevPage + 1 } } }));
   }
-
-  // useEffect(() => {
-  //   console.log(datas);
-  // }, [datas]);
 
   return (
     <>
@@ -62,31 +78,24 @@ const Series = ({ type }) => {
               );
             })}
           </ul>
-
-          <GridHolder>
-            {datas[current].anime &&
-              !error &&
-              request.status === 200 &&
-              datas[current].anime.map((el, index) => {
-                return <Grid key={index} anime={el} />;
-              })}
-          </GridHolder>
+          {
+            loading ? <Loading /> :
+            error ? <Wrong /> :
+            <>
+              <GridHolder>
+                {datas[current].anime &&
+                  !error &&
+                  datas[current].anime.map((el, index) => {
+                    return <Grid key={index} anime={el} prev={{ location: currentLocation, mark: current }}/>;
+                  })}
+              </GridHolder>
+              {anime && datas[current].page < lastPage && (
+                <button className="load-more" onClick={changePage}>Load More</button>
+              )}
+            </>
+          }
         </Content>
-        {loading && <Loading />}
-        {error && <Wrong />}
-        {!error &&
-          anime &&
-          datas[current].page < lastPage &&
-          !loading &&
-          request.status === 200 && (
-            <button onClick={changePage}>Load More</button>
-          )}
-        {request.status !== 200 && (
-          <Wrong
-            padding={"0"}
-            text={`Error ${request.status}. ${request.message}. Much apologies for the inconvenience, feel free to try again in a few minutes.`}
-          />
-        )}
+
       </Wrapper>
     </>
   );

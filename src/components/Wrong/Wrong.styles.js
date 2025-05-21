@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding-top: ({(padding)}=> "10vh" ?? padding);
+  padding: 10vh 25vh;
+  flex-grow: 1;
   background: var(--black);
 
   @media screen and (max-width: 768px) {
@@ -17,11 +18,11 @@ export const Content = styled.div`
   letter-spacing: 0.05em;
 
   #img-div {
-    margin: 5vh 0;
+    // margin: 5vh 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 20vh;
 
     img {
@@ -38,7 +39,7 @@ export const Content = styled.div`
         color: var(--white);
         transition: color 0.15s ease-in-out;
 
-        :hover {
+        &:hover {
           color: var(--less-orange);
         }
       }

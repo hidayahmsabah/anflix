@@ -1,38 +1,43 @@
-import React from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Sliders from "./Sliders";
-import { useHomeFetch } from "../hooks/useHomeFetch";
-import { useGenreFetch } from "../hooks/useGenreFetch";
+import { useHomeFetchNew } from "../hooks/useHomeFetchNew";
 import Top from "./Top";
+import Wrong from "./Wrong";
 
 const Home = ({ width, $visible }) => {
-  const { random, top, addInfo } = useHomeFetch();
-  const { allGenres } = useGenreFetch();
+
+  const { random, top, allGenres } = useHomeFetchNew();
+
+  console.log("Home random", random)
+  console.log("Home top", top)
 
   return (
     <>
       <Navbar width={width} />
-      {random && <Header header={random} extra={addInfo} width={width} />}
-      <main>
-        <Sliders
-          title="Top Animes"
-          list={top}
-          className={!random && "no-header"}
+      {
+        random?.error && top?.error && 
+        <Wrong 
+          text="Oops, it appears both AniList and MyAnimeList is unavailable right now. Please try again later." 
+          back={false}
         />
-        {/* {allGenres && (
-          allGenres.length === 5 &&
-          allGenres.map((el, index) => (
-            <Sliders
-              key={index}
-              title={`${el.genre} Anime`}
-              list={el.results}
-            />
-          ))
-        )} */}
-        {!allGenres ? (
-          <div>Something went wrong</div>
-        ) : (
+      }
+      {random && !random.error && <Header header={random} width={width} />}
+      <main>
+        {
+          !top?.error ?
+          <Sliders
+            title="Top Animes"
+            list={top}
+            className={random?.error && "no-header"}
+          /> : 
+          !random?.error ?
+          <Wrong 
+            text="Something went wrong while getting Top Animes. Please try again later." 
+            back={false}
+          /> : null
+        }
+        {allGenres && (
           allGenres.map((el, index) => (
             <Sliders
               key={index}

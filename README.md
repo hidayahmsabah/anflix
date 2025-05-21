@@ -1,20 +1,20 @@
 # AnFlix
 
-[AnFlix](https://anflix.netlify.app/) is an anime database website which connects information from both MyAnimeList and Anilist page. It utilizes MyAnimeList (MAL) unofficial API: [Jikan](https://jikan.moe/) and [Anilist official API](https://anilist.gitbook.io/anilist-apiv2-docs/). 
+[AnFlix](https://anflix.netlify.app/) is an anime database website which connects information from both MyAnimeList and AniList page. It utilizes MyAnimeList (MAL) unofficial API: [Jikan](https://jikan.moe/) and [AniList official API](https://anilist.gitbook.io/anilist-apiv2-docs/). 
 
 ## Background
 
-Anime fans rely heavily on anime database sites such as MAL and Anilist to look up more information about their favorite series/movies.
+Anime fans rely heavily on anime database sites such as MAL and AniList to look up more information about their favorite series/movies.
 
 MAL has always been the more popular of the two as it has been around for longer and has forums in which fans can use to discuss and interact with each other about their favorite anime. Unfortunately, the site's design is quite dated, difficult to navigate and not mobile friendly. 
 
-Anilist takes care of all of the above concerns but their database is not as comprehensive as MAL. Their search engine does not cover both English and Japanese titles which makes searching for a specific animes a hassle.
+AniList takes care of all of the above concerns but their database is not as comprehensive as MAL. Their search engine does not cover both English and Japanese titles which makes searching for a specific anime a hassle.
 
 AnFlix is build to bridge the gap between the two anime database sites with the help of the design, which is heavily influenced by the globally popular online streaming service platform, Netflix and usage of both sites' APIs. Thus, the name AnFlix.  
 
 ## Features
 
-- Header with randomized anime that refreshes every time the page is loaded 
+- Header with randomized anime
 - Homepage that automatically chooses 5 anime genres to showcase to the users and display its top 20 animes 
 - Search engine that works to find animes written both in English and Romanized Japanese
 - Find popular animes of all times, will be aired or currently airing based on MAL rating  
@@ -29,7 +29,7 @@ AnFlix is build to bridge the gap between the two anime database sites with the 
 
 ## Tech
 
-Anflix uses a number of open source projects to work properly:
+AnFlix uses a number of open source projects to work properly:
 
 - [ReactJS](https://reactjs.org/) - JS library 
 - [Slick Carousel](https://react-slick.neostack.com/) - For carousel feature

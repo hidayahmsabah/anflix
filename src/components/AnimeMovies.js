@@ -1,5 +1,3 @@
-import React from "react";
-// import Movies from "./Movies";
 import Navbar from "./Navbar";
 import Series from "./Series";
 import Top from "./Top";

@@ -220,3 +220,14 @@ export const Cancel = styled(MdCancel)`
     }
   }
 `;
+
+export const InputError = styled.span`
+  display: none;
+  font-size: 0.9em;
+
+  &.error {
+    display: inline-block;
+    color: red
+  }
+
+`

@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   padding-top: 7vh;
-  min-height: 100vh;
+  flex-grow: 1;
   background-color: var(--black);
 
-  button {
+  .load-more {
     background-color: var(--grey);
     color: var(--white);
     padding: 0.75em 2em;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 450px) {
-    button {
+    .load-more {
       font-size: 0.7em;
     }
   }
@@ -79,7 +79,7 @@ export const Content = styled.div`
 
 export const GridHolder = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 3rem;
   padding: 1em 1em 3em;
   color: var(--white);

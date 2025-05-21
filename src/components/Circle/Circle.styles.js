@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   width: 3em;
   height: 3em;
-  background-color: ${({ bg }) => bg};
+  background-color: ${({ $bg }) => $bg};
   border-radius: 100%;
   display: inline-flex;
   justify-content: center;

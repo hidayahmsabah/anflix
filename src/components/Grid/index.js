@@ -1,32 +1,33 @@
-import React from "react";
 import Circle from "../Circle";
 import Loading from "../Loading";
 import { Wrapper, Content } from "./Grid.styles";
 
-const Grid = ({ anime }) => {
+const Grid = ({ key, anime, prev }) => {
   if (!anime) return <Loading />;
 
   return (
-    <Wrapper>
-      <Content to={`/anime/${anime.mal_id}`}>
+    <Wrapper key={key}>
+      <Content to={`/anime/${anime.mal_id}`} $blurBg={anime.images.jpg.image_url} state={{ ...prev }}>
         <div className="image-holder">
-          <img
-            src={anime.image_url}
-            alt={`${anime.title} cover`}
-            loading="lazy"
-          />
+          <div className="background-blur">
+            <img
+              src={anime.images.jpg.image_url}
+              alt={`${anime.title_english ?? anime.title} cover`}
+              loading="lazy"
+            />
+          </div>
         </div>
         <div className="info-holder">
-          {anime.end_date && (
+          {anime.score && (
             <Circle
-              perc={anime.score}
+              $perc={anime.score}
               rating="/10"
-              bg={
+              $bg={
                 anime.score < 3 ? "red" : anime.score < 7 ? "orange" : "green"
               }
-            ></Circle>
+            />
           )}
-          <span>{anime.title}</span>
+          <span>{anime.title_english ?? anime.title}</span>
         </div>
       </Content>
     </Wrapper>

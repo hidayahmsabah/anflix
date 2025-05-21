@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     position: relative;
-    /* background: var(--black); */
+    min-width: 100%;
+    height: 100vh;
+    flex-grow: 1;
     padding: 3.5rem 5%;
     margin: 0;
 `
@@ -15,6 +17,7 @@ export const Content = styled.div`
     padding: 2rem 0;
     margin: 0 -5%;
     overflow: hidden;
+    height: 100%;
 
     .dot-pulse {
         position: relative;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Content, Wrapper } from "./Top.styles";
 import { FaAngleUp } from "react-icons/fa";
 

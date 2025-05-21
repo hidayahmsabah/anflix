@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router"
 import { useTopFetch } from "../../hooks/useTopFetch";
 import Grid from "../Grid";
 import Loading from "../Loading";
@@ -11,12 +12,28 @@ const New = () => {
     ["Upcoming", "upcoming"],
     ["All Time", "favorite"],
   ];
-  const [current, setCurrent] = useState(0);
-  const { anime, loading, error } = useTopFetch(options[current][1]);
 
-  // console.log(anime);
+  const state = useLocation().state
+  
+  const [current, setCurrent] = useState(state ? state.mark : 0);
+  const { anime, loading, error } = useTopFetch(1, options[current][1]);
+
+  const currentLocation = useLocation().pathname
+
+  const toTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  useEffect(() => {  
+    toTop()
+  }, [])
+  
 
   function changeTabs(index) {
+    toTop()
     index !== current && setCurrent(index);
   }
 
@@ -36,14 +53,17 @@ const New = () => {
             ))}
           </ul>
         </Tab>
-        <Content>
-          {loading && !anime && <Loading />}
-          {error && <Wrong />}
-          {!error &&
-            !loading &&
-            anime &&
-            anime.map((el, index) => <Grid key={index} anime={el} />)}
-        </Content>
+        { 
+          error ? 
+          <Wrong/> :
+          loading ? 
+          <Loading /> :
+          <Content>
+            {!error &&
+              anime &&
+              anime.map((el, index) => <Grid key={index} anime={el} prev={{ location: currentLocation, mark: current }}/>)}
+          </Content>
+        }
       </Wrapper>
     </>
   );

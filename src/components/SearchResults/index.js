@@ -1,79 +1,71 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Filter from "../Filter";
 import Loading from "../Loading";
 import Grid from "../Grid";
 import Wrong from "../Wrong";
 import { Wrapper, Content } from "./SearchResults.styles";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import { useSearchFetch } from "../../hooks/useSearchFetch";
 
 const SearchResults = () => {
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
+  const [criteria, setCriteria] = useState([])
+  const [searchParams, setSearchParams] = useState(null)
   const { title } = useParams();
 
-  const { result, lastPage, loading, error, request } = useSearchFetch(
-    title,
-    page
-  );
+  const state = useLocation().state
+  const currentLocation = useLocation().pathname
+
+  useEffect(() => {
+
+    let passedState = state ? state.params ?? state.mark : null
+
+    
+    let userSearch = state ? { ...passedState } : {}
+
+    setSearchParams({ sfw: true, page: 1, ...userSearch})
+  }, [state])
+
+  useEffect(() => {
+    const arr = title.split(',');
+
+    setCriteria(arr)
+  }, [title])
+  
+  const { result, lastPage, total, loading, error } = useSearchFetch(searchParams);
 
   function changePage() {
-    setPage(page + 1);
+    setSearchParams({...searchParams, page: searchParams.page + 1});
   }
 
-  useEffect(() => {
-    setPage(1)
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    
-  }, [title])
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
-
-  console.log(request);
 
   return (
     <Wrapper>
-      <Filter initial={title} />
-      {!loading && request.status === 200 && (
+      <Filter searchParams={searchParams} />
+      {
+        (!loading || searchParams && searchParams.page > 1) &&
         <h2>
-          {`${result.length} results found for search`}{" "}
-          <i>
-            {title[0] === "&"
-              ? ""
-              : title.indexOf("&") > -1
-              ? title.slice(0, title.indexOf("&"))
-              : title}
-          </i>
+          {`${total}`} results found for search {criteria.map((el, id) => <span className="criteria" key={id}>{el}</span>)}
         </h2>
+      }
+      {
+        error ? <Wrong/> :
+        loading && searchParams && searchParams.page === 1 ? <Loading/> :
+        <Content> 
+          {
+            result.map((el, index) => (
+              <Grid key={index} anime={el} prev={{ location: currentLocation, mark: searchParams }}/>
+            ))
+          }
+        </Content>
+      }
+
+      {
+        loading && !error && searchParams && searchParams.page > 1 && <Loading/>
+      }
+      {result && searchParams && searchParams.page < lastPage && !loading && !error && (
+        <button className="load-more" onClick={changePage}>Load More</button>
       )}
-      <Content>
-        {result &&
-          request.status === 200 &&
-          result.map((el, index) => (
-            <Grid key={index} anime={el}>
-              {el.title}
-            </Grid>
-          ))}
-      </Content>
-      {result &&
-        page < lastPage &&
-        !loading &&
-        !error &&
-        request.status === 200 && (
-          <button onClick={changePage}>Load More</button>
-        )}
-      {request.status !== 200 && (
-        <Wrong
-          padding={"0"}
-          text={`Error ${request.status}. ${request.message}. Much apologies for the inconvenience, feel free to try again in a few minutes.`}
-        />
-      )}
-      {loading && <Loading />}
-      {error && <Wrong />}
     </Wrapper>
   );
 };

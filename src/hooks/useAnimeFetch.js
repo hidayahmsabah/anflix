@@ -1,45 +1,47 @@
 import { useState, useEffect } from "react";
+import { loader } from 'graphql.macro';
 import fetchingData from "../API";
 
+const AnimeInfoQuery = loader('../queries/graphql/AnimeInfo.graphql')
+
 export function useAnimeFetch(animeId) {
-  const [anime, setAnime] = useState();
-  const [addInfo, setAddInfo] = useState();
-  const [seiyuu, setSeiyuu] = useState();
-  // const [error, setError] = useState(false);
+  const [anime, setAnime] = useState(null);
+  // const [addInfo, setAddInfo] = useState();
+  // const [seiyuu, setSeiyuu] = useState();
+  const [error, setError] = useState();
 
   useEffect(() => {
-    const fetchExtra = async () => {
-      // try {
-      try {
-        const indAnime = await fetchingData.GetAnimeAni(animeId);
-        setAnime(indAnime);
-      } catch {
-        console.log("Error at Ani");
-        // setAnime(false);
-      }
+
+    let variables = {
+        idMal: animeId,
     };
 
     const fetchData = async () => {
       try {
-        const addAnimeInfo = await fetchingData.GetAnimeMAL(animeId);
-        setAddInfo(addAnimeInfo);
-      } catch {
-        console.log("Error at MAL");
-        // setAddInfo(false);
-      }
+        const anlInfo = async() => await fetchingData.callGraphQL(AnimeInfoQuery, variables);
+        const malInfo = async() => await fetchingData.GetAnimeMAL(animeId);
 
-      try {
-        const addActorInfo = await fetchingData.GetAnimeSeiyuu(animeId);
-        setSeiyuu(addActorInfo);
-      } catch {
-        console.log("Error getting MAL seiyuus");
-        // setSeiyuu(false);
+        // Promise all will run both paralelly, and respond error when 1 hit error
+        const [malInfoRes, anlInfoRes] = await Promise.all([malInfo(), anlInfo()]);
+
+        console.log("useAnimeFetch malInfoRes", malInfoRes)
+        console.log("useAnimeFetch anlInfoRes", anlInfoRes)
+
+        setAnime({
+          mal: malInfoRes.data,
+          anl: anlInfoRes.Media
+        });
+        // setAddInfo(malInfoRes.data);
+
+
+      } catch (e) {
+        console.log("useAnimeFetch Error", e);
+        setError(true)
       }
     };
 
     fetchData();
-    fetchExtra();
   }, [animeId]);
 
-  return { anime, addInfo, seiyuu };
+  return { anime, error };
 }

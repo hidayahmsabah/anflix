@@ -3,17 +3,15 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   background: var(--black);
   padding: 10vh 1em 0;
+  flex-grow: 1;
 
   h2 {
     color: var(--white);
-    /* padding-left: 1em; */
+    padding: 0.5em 0 0.5em 1em;
 
-    i {
-      color: var(--orange);
-    }
   }
 
-  button {
+  .load-more {
     background-color: var(--grey);
     color: var(--white);
     padding: 0.75em 2em;
@@ -31,18 +29,33 @@ export const Wrapper = styled.div`
     }
   }
 
+  .criteria {
+    font-size: 0.9em;
+    display: inline-block;
+    padding: 3px 15px;
+    margin: 0 10px 0 0;
+    background-color: var(--white);
+    border-radius: 30px;
+    color: var(--orange);
+  }
+
   @media screen and (max-width: 450px) {
-    button {
+    .load-more {
       font-size: 0.7em;
+    }
+
+    .criteria {
+      font-size: 0.8em;
+      padding: 3px 10px;
     }
   }
 `;
 
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 3rem;
-  padding: 2em 0;
+  padding: 1em 1em 3em;
   color: var(--white);
 
   @media screen and (max-width: 450px) {

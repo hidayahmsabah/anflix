@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   &:hover {
-    transform: translateY(-3%);
-    letter-spacing: 0.03em;
+    transform: translateY(-1.5%);
+    // transform: scale(1.05);
   }
 `;
 
@@ -22,7 +22,25 @@ export const Content = styled(Link)`
 
   .image-holder {
     /* background: var(--black); */
-    padding-bottom: 0.3em;
+    // margin-bottom: 0.3em;
+    border-radius: 0.5em;
+    flex: 1;
+    background:
+    top / cover no-repeat
+      url(${({ $blurBg }) =>
+        !$blurBg
+          ? ""
+          : $blurBg});
+  }
+
+  .background-blur{
+    backdrop-filter: blur(1.5em);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
   }
 
   .info-holder {
@@ -31,8 +49,9 @@ export const Content = styled(Link)`
   }
 
   img {
-    width: 100%;
-    border-radius: 0.5em;
+    max-width: 90%;
+    max-height: 90%;
+    // border-radius: 0.5em;
   }
 
   span {
@@ -40,12 +59,12 @@ export const Content = styled(Link)`
     width: 100%;
     padding-top: 1em;
     text-align: center;
-    font-size: 0.9em;
+    // font-size: 0.9em;
   }
 
-  :hover span {
-    color: var(--orange);
-  }
+  // &:hover span {
+  //   color: var(--orange);
+  // }
 
   @media screen and (max-width: 450px) {
     .info-holder > div:first-child {

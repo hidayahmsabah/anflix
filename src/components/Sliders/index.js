@@ -1,4 +1,3 @@
-import React from "react";
 import SliderContent from "../SliderContent";
 import { Main, SliderStyled } from "./Sliders.styles";
 import Loading from "../Loading";
@@ -12,7 +11,7 @@ const Sliders = ({ title, list, className }) => {
   const settings = {
     dots: true,
     swipeToSlide: true,
-    lazyLoad: true,
+    // lazyLoad: true,
     slidesToShow: slidesLen,
     slidesToScroll: slidesLen,
     responsive: [
@@ -56,10 +55,10 @@ const Sliders = ({ title, list, className }) => {
           list.map((anime) => {
             return (
               <SliderContent
-                key={anime.anilist_id}
-                text={anime.titles.en}
-                cover={anime.cover_image}
-                id={anime.mal_id}
+                key={anime.idMal ?? anime.mal_id}
+                text={anime.title?.english ?? anime.title?.romaji ?? anime.title_english ?? anime.title}
+                cover={anime.coverImage?.large ?? anime.images?.webp?.large_image_url}
+                id={anime.idMal ?? anime.mal_id}
               />
             );
           })}

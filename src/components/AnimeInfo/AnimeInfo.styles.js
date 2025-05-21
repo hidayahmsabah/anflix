@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   padding: 15vh 1em 0;
   background: var(--black);
-  min-height: 100vh;
+  flex-grow: 1;
   transition: all 0.5s ease;
 
   @media screen and (max-width: 768px) {
@@ -35,7 +35,7 @@ export const Head = styled.div`
   border-bottom: thin solid var(--grey);
 
   h2 {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     font-size: 1.7em;
     transition: font-size 0.5s ease;
   }
@@ -119,15 +119,26 @@ export const Information = styled.div`
 
   .rating {
     font-size: 2em;
-    color: ${({ color }) => color};
+    color: ${({ $color }) => $color};
     font-weight: 600;
     padding-right: 1em;
   }
 
+  .others {
+    div:first-child {
+      text-align: right;
+    }
+  }
+
   span {
-    display: block;
+    // display: block;
     font-size: 0.9em;
     text-align: right;
+  }
+
+  span.break {
+    padding-right: 7px;
+    padding-left: 7px;
   }
 
   ul {
@@ -153,24 +164,23 @@ export const Information = styled.div`
     text-align: justify;
   }
 
+  .mal_genres {
+    transition: all 0.2s ease;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+
   @media screen and (max-width: 768px) {
     margin-top: 1em;
 
-    .info {
-      justify-content: space-around;
-    }
-
     p {
-      text-align: left;
       font-size: 0.95em;
     }
   }
 
   @media screen and (max-width: 480px) {
-    .info {
-      justify-content: space-between;
-    }
-
     .rating {
       font-size: 1.5em;
     }

@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 import SearchResults from "./SearchResults";
 import Top from "./Top";

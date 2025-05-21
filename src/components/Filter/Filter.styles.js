@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaFilter } from "react-icons/fa";
+import { MdError } from "react-icons/md";
 
 export const Wrapper = styled.div`
   text-align: right;
@@ -26,6 +27,13 @@ export const Wrapper = styled.div`
       }
     }
   }
+
+  .emptyFilter {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 0 5px 0;
+  }
 `;
 
 export const FilterLogo = styled(FaFilter)`
@@ -37,6 +45,12 @@ export const FilterLogo = styled(FaFilter)`
     color: var(--orange);
   }
 `;
+
+export const ErrorLogo = styled(MdError)`
+  font-size: 25px;
+  padding-right: 5px;
+  vertical-align: bottom;
+`
 
 export const Content = styled.form`
   position: relative;
@@ -75,7 +89,9 @@ export const Content = styled.form`
     } */
 
   .search-btn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 150px;
     height: 38px;
     border-radius: 4px;
@@ -85,6 +101,7 @@ export const Content = styled.form`
     font-size: 0.9em;
     letter-spacing: 0.1em;
     align-self: center;
+    margin-top: 15px;
   }
 
   label {
@@ -104,7 +121,7 @@ export const Content = styled.form`
     border: thin solid var(--white);
   }
 
-  .select {
+  .custom-select-class {
     color: var(--white);
     background: var(--grey);
     max-width: 100%;
@@ -122,6 +139,22 @@ export const Content = styled.form`
     * {
       background: var(--grey);
       color: var(--white);
+    }
+    
+    // &.genres div[style*="width: 0px"]{
+    //   width: 100% !important;
+    // }
+
+    & :hover {
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-gap: 0;
+
+    .search-btn {
+      margin-top: 0;
     }
   }
 `;

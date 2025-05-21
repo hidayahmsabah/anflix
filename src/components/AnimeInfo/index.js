@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 import {
   Wrapper,
   Content,
@@ -9,45 +10,53 @@ import {
 import Loading from "../Loading";
 import Circle from "../Circle";
 import Back from "../Back";
-import { seasonPeriod } from "../../data/genres";
-// import { useNavigate } from "react-router";
 
-const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
-  // const navigate = useNavigate();
-  if (!anime && !addInfo) return <Loading />;
+const AnimeInfo = ({ anime, seiyuu }) => {
 
-  // function searchGenre(id) {
-  //   navigate(`/search/genre=${id}`);
-  // }
+  const navigate = useNavigate()
 
+  let properCase = (string, type) => {
+    let  newString = string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
+
+    return newString
+  }
+
+  function toTop() {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }
+
+  useEffect(() => {
+    toTop()
+  }, [])
+
+  if (!anime) return <Loading />;
   return (
     <Wrapper>
       <Content>
-        <Back />
+        <Back/>
         <Head>
           <h2>
-            {addInfo
-              ? addInfo.title_english
-                ? addInfo.title_english
-                : addInfo.title
-              : anime && anime.titles.en}
+            {anime?.mal?.title_english ?? anime?.mal?.title ?? anime?.anl?.title?.english ?? anime?.anl?.title?.romaji}
           </h2>
           <div className="scores">
-            {anime && (
+            {anime?.anl?.meanScore && (
               <div className="circles">
                 <Circle
-                  perc={anime.score}
+                  $perc={anime?.anl.meanScore}
                   rating="%"
-                  bg={
-                    anime.score < 33
+                  $bg={
+                    anime?.anl.meanScore < 33
                       ? "red"
-                      : anime.score < 67
+                      : anime?.anl.meanScore < 67
                       ? "orange"
                       : "green"
                   }
                 />
                 <a
-                  href={`https://anilist.co/anime/${anime.anilist_id}`}
+                  href={`https://anilist.co/anime/${anime?.anl?.id}`}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="sources"
@@ -56,21 +65,21 @@ const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
                 </a>
               </div>
             )}
-            {addInfo && (
+            {anime?.mal?.score && (
               <div className="circles">
                 <Circle
-                  perc={addInfo.score}
+                  $perc={anime?.mal.score}
                   rating="/10"
-                  bg={
-                    addInfo.score < 3.3
+                  $bg={
+                    anime?.mal.score < 3.3
                       ? "red"
-                      : addInfo.score < 6.7
+                      : anime?.mal.score < 6.7
                       ? "orange"
                       : "green"
                   }
                 />
                 <a
-                  href={`https://myanimelist.net/anime/${addInfo.mal_id}`}
+                  href={`https://myanimelist.net/anime/${anime?.mal.mal_id}`}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="sources"
@@ -84,67 +93,77 @@ const AnimeInfo = ({ anime, addInfo, seiyuu }) => {
 
         <ContentExtra>
           <img
-            src={anime ? anime.cover_image : addInfo && addInfo.image_url}
+            src={anime?.mal?.images?.jpg?.large_image_url ?? anime?.anl?.coverImage?.extraLarge}
+            fetchpriority={"high"}
+            loading={"eager"}
+            height={400}
+            width={300}
             alt={`${
-              addInfo ? addInfo.title_english : anime && anime.titles.en
+              anime?.mal?.title_english ?? anime?.anl?.title?.english
             } cover`}
           ></img>
           <Information
-            color={
-              addInfo && addInfo.rating && addInfo.rating[0] === "R"
+            $color={
+              anime?.mal?.rating && anime?.mal.rating[0] === "R"
                 ? "red"
                 : "green"
             }
           >
             <div className="info">
               <div className="rating">
-                {addInfo &&
-                  addInfo.rating.slice(0, addInfo.rating.indexOf(" "))}
+                {anime?.mal?.rating &&
+                  anime?.mal.rating.slice(0, anime?.mal.rating.indexOf(" "))}
               </div>
               <div className="others">
-                {addInfo && (
-                  <span>
-                    {addInfo.type && `${addInfo.type}`}
-                    {addInfo.status && `  |  ${addInfo.status}`}
-                    {addInfo.episodes && `  |  ${addInfo.episodes} episode(s)`}
-                    {addInfo.premiered
-                      ? `  |  ${addInfo.premiered}`
-                      : anime &&
-                        `  |  ${
-                          Object.keys(seasonPeriod)[anime.season_period][0] +
-                          Object.keys(seasonPeriod)
-                            [anime.season_period].slice(1)
-                            .toLowerCase()
-                        } ${anime.season_year}`}
-                  </span>
-                )}
+                <div>
+                  {
+                    anime?.mal ? [
+                      anime?.mal.type && <span> {`${anime?.mal.type}`} </span>,
+                      anime?.mal.type && anime?.mal.status && <span className="break">|</span>,
+                      anime?.mal.status && <span> {`${anime?.mal.status}`} </span>,
+                      anime?.mal.status && anime?.mal.episodes && <span className="break">|</span>,
+                      anime?.mal.episodes && <span> {`${anime?.mal.episodes} episode(s)`} </span>,
+                      anime?.mal.episodes && anime?.mal.season && <span className="break">|</span>,
+                      anime?.mal.season && anime?.mal.year && <span> {`${properCase(anime?.mal.season)} ${anime?.mal.year}`} </span>
+                    ] :
+                    anime?.anl && [
+                      anime?.anl.format && <span> {`${anime?.anl.format}`} </span>,
+                      anime?.anl.format && anime?.anl.status && <span className="break">|</span>,
+                      anime?.anl.status && <span> {`${anime?.anl.status}`} </span>,
+                      anime?.anl.status && anime?.anl.episodes && <span className="break">|</span>,
+                      anime?.anl.episodes && <span> {`${anime?.anl.episodes} episode(s)`} </span>,
+                      anime?.anl.episodes && anime?.anl.season && <span className="break">|</span>,
+                      anime?.anl.season && anime?.anl.seasonYear && <span> {`${properCase(anime?.anl.season)} ${anime?.anl.seasonYear}`} </span>
+                    ]
+                  }
+                </div>
 
                 <ul>
-                  {addInfo
-                    ? addInfo.genres.map((el, index) => {
+                  {(anime?.mal?.genres ?? []).map((el, index) => {
                         return (
                           <li
                             key={index}
-                            // onClick={() => searchGenre(el.mal_id)}
+                            className="mal_genres"
+                            onClick={() => navigate(`/search/${el.name}`, { state: { params: { genres: [el.mal_id] }}})}
                           >
                             {el.name}
                           </li>
                         );
                       })
-                    : anime.genres.map((el, index) => {
+                    ?? (anime?.anl?.genres ?? []).map((el, index) => {
                         return (
                           <li
                             key={index}
-                            // onClick={() => searchGenre(el.mal_id)}
+                            // onClick={() => navigate(`/search/`, { state: { params: { genres: [el] }}})}
                           >
-                            {el.name}
+                            {el}
                           </li>
                         );
                       })}
                 </ul>
               </div>
             </div>
-            <p>{addInfo ? addInfo.synopsis : anime && anime.descriptions.en}</p>
+            <p>{anime?.mal?.synopsis ?? anime?.anl?.description}</p>
           </Information>
         </ContentExtra>
       </Content>

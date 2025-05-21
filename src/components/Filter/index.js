@@ -1,41 +1,75 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useNavigate } from "react-router";
-import { MLGenre, typeMal, statusMAL, ratingMAL } from "../../data/genres";
-import { Wrapper, FilterLogo, Content } from "./Filter.styles";
+import { getMALGenre, updateMALGenre, typeMal, statusMAL, ratingMAL } from "../../data/genres";
+import { Wrapper, FilterLogo, ErrorLogo, Content } from "./Filter.styles";
+import fetchingData from "../../API";
 
-const Filter = ({ initial }) => {
-  //   console.log(initial);
+const Filter = ({ searchParams }) => {
 
   const [filter, setFilter] = useState(false);
+  const [stateParams, setStateParams] = useState(null)
+  const [emptyFilter, setEmptyFilter] = useState(false)
+
+  // options
+  const [genreOptions, setGenreOptions] = useState(null);
+  const [typeOptions, setTypeOptions] = useState(null);
+  const [statusOptions, setStatusOptions] = useState(null);
+  const [ratingOptions, setRatingOptions] = useState(null);
+
+  // selected
+  const [inputValue, setInputValue] = useState('')
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [selectedType, setSelectedType] = useState([]);
   const [selectedRating, setSelectedRating] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
+
   const navigate = useNavigate();
-  const inputTextRef = useRef();
 
   const animatedComponents = makeAnimated();
 
-  const optionsGenre = ["Genre", setSelectedGenre];
-  const optionsType = ["Type", setSelectedType];
-  const optionsStatus = ["Status", setSelectedStatus];
-  const optionsRating = ["Rating", setSelectedRating];
+  // easily map to create Select comp
+  const optionsGenre = {
+    label: "Genres",
+    selected: selectedGenre,
+    setSelectedFn: setSelectedGenre,
+    options: genreOptions
+  };
+  const optionsType = {
+    label: "Type", 
+    selected: selectedType, 
+    setSelectedFn: setSelectedType, 
+    options: typeOptions
+  };
+  const optionsStatus = {
+    label: "Status", 
+    selected: selectedStatus, 
+    setSelectedFn: setSelectedStatus, 
+    options: statusOptions
+  };
+  const optionsRating = {
+    label: "Rating", 
+    selected: selectedRating, 
+    setSelectedFn: setSelectedRating, 
+    options: ratingOptions
+  };
 
-  function populateArray(object, array) {
-    for (let x = 2; x < Object.keys(object).length + 2; x++) {
-      array[x] = {
-        value: Object.keys(object)[x - 2],
-        label: Object.values(object)[x - 2],
-      };
-    }
+  // check to see MAL genres have been fetched or not
+  if (!sessionStorage.getItem("malGenres")) {
+    fetchMALGenres()
+  } else {
+    let getMALGenresStored = JSON.parse(sessionStorage.getItem("malGenres"))
+    updateMALGenre(getMALGenresStored)
   }
 
-  populateArray(MLGenre, optionsGenre);
-  populateArray(typeMal, optionsType);
-  populateArray(statusMAL, optionsStatus);
-  populateArray(ratingMAL, optionsRating);
+  async function fetchMALGenres() {
+    const malGenres = await fetchingData.GetAnimeGenres();
+
+    updateMALGenre(malGenres.data)
+    sessionStorage.setItem("malGenres", JSON.stringify(malGenres.data))
+  }
+
 
   function openFilter() {
     filter ? setFilter(false) : setFilter(true);
@@ -43,60 +77,96 @@ const Filter = ({ initial }) => {
 
   function submitFilter(e) {
     e.preventDefault();
-    let inputValue = inputTextRef.current.value;
-    let inputParam = `${inputValue ? encodeURI(inputValue) : ""}`;
-    let searchParam = "";
-    let name = [
-      ["genre", selectedGenre],
-      ["type", selectedType],
-      ["status", selectedStatus],
-      ["rating", selectedRating],
-    ];
-    name.forEach((el, index) => {
-      searchParam =
-        searchParam +
-        `${el[0]}=${el[1]}${index !== name.length - 1 ? "&" : ""}`;
-    });
-    let params = new URLSearchParams(searchParam);
-    let toDelete = [];
-    params.forEach((value, key) => {
-      if (value.length < 1) {
-        toDelete.push(key);
-      }
-    });
-    toDelete.forEach((el) => {
-      params.delete(el);
-    });
-    let newParams = params.toString();
-    let finalParam = `${newParams ? inputParam + "&" + newParams : inputParam}`;
-    navigate(`/search/${finalParam}`);
+    let { page, sfw, ...others } = stateParams
+    let allSelected = [].concat(selectedGenre ?? [], [selectedRating ?? {}], [selectedStatus ?? {}], [selectedType ?? {}])
+
+    function combineObjectArraysToString(arr) {
+      let resultString = "";
+
+      for (const objArray of arr) {
+          if (objArray.label) {
+            resultString += objArray.label + ",";
+          }
+        }
+
+      return resultString.trim();
+    }
+
+    let selectedParams = combineObjectArraysToString(allSelected)
+    
+    let urlParams = inputValue ? selectedParams + inputValue : selectedParams.slice(0, selectedParams.length - 1)
+    console.log("urlParams", urlParams)
+    Object.keys(others).length > 0 ? navigate(`/search/${urlParams}`, { state: { params: stateParams }}) : setEmptyFilter(true);
   }
 
-  const handleChange = (options, type) => {
-    let option = options.map((el) => el.value);
-    if (type.name === "genre") {
-      setSelectedGenre(option);
-    } else if (type.name === "type") {
-      setSelectedType(option);
-    } else if (type.name === "status") {
-      setSelectedStatus(option);
-    } else if (type.name === "rating") {
-      setSelectedRating(option);
-    }
-  };
+  const handleChange = (selected, filterType, optionObj) => {
+    console.log("handleChange", selected, filterType)
+    optionObj["setSelectedFn"](selected)
 
+    let checkSelected = filterType === "genres" ? selected.length > 0 : selected
+    
+    if (checkSelected) {
+      let optForParam = filterType === "genres" ? selected.map((el) => el.value) : selected.value
+      setStateParams({ ...stateParams, [filterType]: optForParam})
+      setEmptyFilter(false)
+    } else {
+      let deleteClearedVar = { ...stateParams }
+      delete deleteClearedVar[filterType]
+      setStateParams(deleteClearedVar)
+    }
+  }
+
+  // useEffect to map back the selected inputs into the filter box
   useEffect(() => {
-    inputTextRef.current.value =
-      initial[0] === "&"
-        ? ""
-        : initial.indexOf("&") > -1
-        ? initial.slice(0, initial.indexOf("&"))
-        : initial;
-  }, [initial]);
+    if (searchParams) {
+      let { q } = searchParams
+      
+      if (q) {
+        setInputValue(q)
+        setStateParams({...stateParams, q})
+      }
+
+      [optionsGenre, optionsRating, optionsStatus, optionsType].forEach(el => {
+        let small = el.label.toLowerCase()
+        let val = searchParams[`${small}`]
+        if (val && el.options) {
+          let selectedMap = small === "genres" ? el.options.filter(el => val.includes(el.value)) : el.options.find(el => val === el.value)
+          el.setSelectedFn(selectedMap)
+        }
+      })
+    }
+  }, [searchParams]);
+
+  // useEffect to map options list for Select component
+  useEffect(() => {
+    const genreData = getMALGenre();
+    const genres = Object.values(genreData).map(g => ({
+      value: g.mal_id,
+      label: g.name
+    }));
+    setGenreOptions(genres);
+
+    const types = Object.entries(typeMal).map(([key, label]) => ({
+      value: key,
+      label
+    }));
+    setTypeOptions(types);
+
+    const statuses = Object.entries(statusMAL).map(([key, label]) => ({
+      value: key,
+      label
+    }));
+    setStatusOptions(statuses);
+
+    const ratings = Object.entries(ratingMAL).map(([key, label]) => ({
+      value: key,
+      label
+    }));
+    setRatingOptions(ratings);
+  }, []);
 
   return (
     <Wrapper>
-      {/* {<h2>{initial}</h2>} */}
       <div className="filter-btn">
         <button
           onClick={openFilter}
@@ -106,6 +176,12 @@ const Filter = ({ initial }) => {
           <FilterLogo className={`${filter && "active"}`} />
         </button>
       </div>
+      { emptyFilter && 
+        <div className="emptyFilter">
+          <ErrorLogo/>
+          Please provide at least one searching criteria in the filter
+        </div>
+      }
       <Content className={`${filter && "active"}`}>
         <div className="input">
           <label htmlFor="title">Title</label>
@@ -113,34 +189,47 @@ const Filter = ({ initial }) => {
             type="text"
             name="q"
             id="title"
-            defaultValue={initial}
-            ref={inputTextRef}
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value)
+              let val = { ...stateParams }
+              if (e.target.value === '') {
+                delete val.q
+              } else {
+                val.q = e.target.value
+                setEmptyFilter(false)
+              }
+              setStateParams(val)
+            }}
           />
         </div>
 
         {[optionsGenre, optionsType, optionsStatus, optionsRating].map(
           (el, index) => {
-            let opt = el[0];
-            let small = opt[0].toLowerCase() + opt.slice(1, opt.length);
+            let opt = el["label"];
+            let small = opt.toLowerCase();
             return (
               <div key={index} className="input">
                 <label htmlFor={small}>{opt}</label>
                 <Select
-                  className={`${small} select`}
+                  className={`${small} custom-select-class`}
                   autoFocus={false}
-                  placeholder={opt}
+                  placeholder={""}
                   name={small}
                   id={small}
                   closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  isMulti
-                  options={el.slice(2, el.length)}
-                  onChange={handleChange}
+                  // components={animatedComponents}
+                  isClearable
+                  isMulti={small === "genres"}
+                  isSearchable={small === "genres"}
+                  options={el["options"]}
+                  value={el["selected"]}
+                  onChange={(e) => handleChange(e, small, el)}
                 />
               </div>
             );
           }
-        )}
+        )}       
 
         <button
           type="button"

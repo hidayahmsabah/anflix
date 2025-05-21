@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Wrapper, HeaderContent } from "./Header.styles";
 // import { GetTopAnime } from '../../API';
 
-const Header = ({ header, width, extra }) => {
+const Header = ({ header, width }) => {
   const paraRef = useRef();
 
   function addDots(len, text) {
@@ -31,23 +31,13 @@ const Header = ({ header, width, extra }) => {
     }
   }
 
-  plotWords(
-    extra ? extra.synopsis : header.descriptions.en && header.descriptions.en
-  );
+  plotWords(header?.synopsis);
 
   return (
     <>
-      <Wrapper $header={header}>
-        <HeaderContent to={`/anime/${header ? header.mal_id : ""}`}>
-          <h3>
-            {header.titles.en
-              ? header.titles.en
-              : extra
-              ? extra.title_english
-                ? extra.title_english
-                : extra.title
-              : ""}
-          </h3>
+      <Wrapper $header={header?.images?.webp?.large_image_url}>
+        <HeaderContent to={`/anime/${header?.mal_id}`}>
+          <h3>{header?.title_english ?? header?.title}</h3>
           <p ref={paraRef}></p>
         </HeaderContent>
       </Wrapper>

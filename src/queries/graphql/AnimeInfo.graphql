@@ -1,0 +1,25 @@
+query AnimeInfo($idMal: Int) {
+  Media(idMal: $idMal) {
+    id
+    idMal
+    genres
+    coverImage {
+      extraLarge
+      large
+      medium
+      color
+    }
+    title {
+      romaji
+      english
+      native
+    }
+    format
+    episodes
+    status
+    season
+    seasonYear
+    meanScore
+    description
+  }
+}

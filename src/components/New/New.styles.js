@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  min-height: 100vh;
+  flex-grow: 1;
   padding-top: 10vh;
   background-color: var(--black);
   display: flex;
@@ -10,17 +10,17 @@ export const Wrapper = styled.div`
 
 export const Tab = styled.div`
   position: sticky;
-  top: max(6.8vh, 44px);
+  top: max(7vh, 44px);
   background-color: var(--black);
   z-index: 100;
 
   ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     border-bottom: thin solid var(--grey);
-    /* min-height: 44px; */
+    margin-right: 40px;
 
     li {
       color: var(--grey);
@@ -35,10 +35,20 @@ export const Tab = styled.div`
       &.active {
         color: var(--white);
         letter-spacing: 0.1em;
-        padding: 0.5em 2em;
+        padding: 1em 2em;
         border-radius: 0.5em 0.5em 0 0;
         background-color: var(--grey);
       }
+
+      &.active::before{
+        content: '';
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      justify-content: center;
     }
   }
 
@@ -56,9 +66,9 @@ export const Content = styled.div`
   flex: 1;
   background: linear-gradient(rgba(48, 48, 48, 1) 30%, rgba(20, 20, 20, 1) 80%);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 3rem;
-  padding: 1em 1em 3em;
+  padding: 2em 2em 3em;
   color: var(--white);
 
   @media screen and (max-width: 450px) {

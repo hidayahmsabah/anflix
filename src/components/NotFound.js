@@ -1,4 +1,3 @@
-import React from "react";
 import Abyss from "./Abyss";
 import Navbar from "./Navbar";
 

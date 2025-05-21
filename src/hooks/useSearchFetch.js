@@ -1,27 +1,24 @@
 import { useState, useEffect } from "react";
 import fetchingData from "../API";
 
-export function useSearchFetch(searchTerm, page) {
+export function useSearchFetch(params) {
+  console.log("useSearchFetch params", params)
   const [result, setResult] = useState([]);
   const [lastPage, setLastPage] = useState(0);
+  const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [request, setRequest] = useState({ status: 200, message: "OK" });
 
   useEffect(() => {
     const getResult = async () => {
       try {
         setLoading(true);
-        const results = await fetchingData.GetSearchAnime2(searchTerm, page);
-        setLastPage(results.data.last_page);
-        // console.log(results.status);
-        results.status === 200
-          ? setResult((prev) =>
-              page > 1
-                ? [...prev, ...results.data.results]
-                : [...results.data.results]
-            )
-          : setRequest({ status: results.status, message: results.message });
+        const results = await fetchingData.GetSearchAnime(params);
+        setLastPage(results.pagination.last_visible_page);
+        setTotal(results.pagination.items.total);
+        setResult((prev) =>
+          params.page > 1 ? [...prev, ...results.data] : [...results.data]
+        );
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -30,8 +27,8 @@ export function useSearchFetch(searchTerm, page) {
       }
     };
 
-    searchTerm && getResult();
-  }, [searchTerm, page]);
+    params && getResult();
+  }, [params]);
 
-  return { result, lastPage, loading, error, request };
+  return { result, lastPage, total, loading, error };
 }

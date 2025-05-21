@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useParams } from "react-router";
 import {
@@ -12,12 +12,14 @@ import {
   SearchIcon,
   Input,
   Cancel,
+  InputError,
 } from "./Navbar.styles";
 import BrowseBar from "../BrowseBar";
 
 const Navbar = ({ index, width }) => {
   const [search, setSearch] = useState(false);
   const [browse, setBrowse] = useState(false);
+  const [error, setError] = useState(false)
   const [navScroll, setNavScroll] = useState(false);
   const searchBarRef = useRef();
   const browseRef = useRef();
@@ -48,9 +50,13 @@ const Navbar = ({ index, width }) => {
     const value = inputRef.current.value;
     if (e.key === "Enter") {
       if (value.length > 2) {
-        navigate(`/search/${value}`);
+        navigate(`/search/${value}`, { state: { params: { q: value }}});
         inputRef.current.value = "";
+      } else {
+        setError(true)
       }
+    } else {
+      setError(false)
     }
   }
 
@@ -90,13 +96,19 @@ const Navbar = ({ index, width }) => {
         className={`${search && "active"} searchbar`}
       >
         <SearchIcon className="searchIcon" />
-        <Input
-          type="text"
-          ref={inputRef}
-          className={`${search && "active"}`}
-          onKeyUp={(e) => searchEnter(e)}
-          placeholder="3 Characters Minimum"
-        />
+        {/* <div> */}
+          <Input
+            type="text"
+            ref={inputRef}
+            className={`${search && "active"}`}
+            onKeyUp={(e) => searchEnter(e)}
+            placeholder="3 Characters Min"
+          />
+          {/* <InputError className={`${error && "error"}`}>
+            Please enter at least 3 letters
+          </InputError>
+        </div> */}
+
         <Cancel className={search && "active"} onClick={cancelSearch} />
       </SearchBar>
     </Wrapper>

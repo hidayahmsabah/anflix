@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding: 20vh 1em 1em;
+  padding: 20vh 15vh 0;
+  flex-grow: 1;
   background: var(--black);
+
+  @media screen and (max-width: 450px) {
+    padding: 10vh 5vh 0;
+  }
 `;
 
 export const Content = styled.div`
@@ -10,6 +15,10 @@ export const Content = styled.div`
   text-align: center;
   font-size: 1.5em;
   letter-spacing: 0.05em;
+
+  h4 {
+    margin-top: 1em;
+  }
 
   p,
   #img-div {
@@ -48,7 +57,7 @@ export const Content = styled.div`
         color: var(--white);
         transition: color 0.15s ease-in-out;
 
-        :hover {
+        &:hover {
           color: var(--less-orange);
         }
       }

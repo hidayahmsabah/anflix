@@ -293,66 +293,26 @@ export const seasonPeriod = {
   UNKNOWN: 4,
 };
 
-export const MLGenre = {
-  1: "Action",
-  2: "Adventure",
-  3: "Cars",
-  4: "Comedy",
-  5: "Avante Garde",
-  6: "Demons",
-  7: "Mystery",
-  8: "Drama",
-  9: "Ecchi",
-  10: "Fantasy",
-  11: "Game",
-  12: "Hentai",
-  13: "Historical",
-  14: "Horror",
-  15: "Kids",
-  17: "Martial Arts",
-  18: "Mecha",
-  19: "Music",
-  20: "Parody",
-  21: "Samurai",
-  22: "Romance",
-  23: "School",
-  24: "Sci Fi",
-  25: "Shoujo",
-  26: "Girls Love",
-  27: "Shounen",
-  28: "Boys Love",
-  29: "Space",
-  30: "Sports",
-  31: "Super Power",
-  32: "Vampire",
-  35: "Harem",
-  36: "Slice Of Life",
-  37: "Supernatural",
-  38: "Military",
-  39: "Police",
-  40: "Psychological",
-  41: "Suspense",
-  42: "Seinen",
-  43: "Josei",
-  46: "Award Winning",
-  47: "Gourmet",
-  48: "Work Life",
-  49: "Erotica",
+const malGenre = {};
+
+export const getMALGenre = () => malGenre;
+
+export const updateMALGenre = (updates) => {
+  Object.assign(malGenre, updates);
 };
 
 export const typeMal = {
   tv: "TV",
   ova: "OVA",
-  movie: "MOVIE",
-  special: "SPECIAL",
+  movie: "Movie",
+  special: "Special",
   ona: "ONA",
-  music: "MUSIC",
+  music: "Music",
 };
 
 export const statusMAL = {
   airing: "Airing",
-  completed: "Completed",
-  to_be_aired: "TBA",
+  complete: "Completed",
   upcoming: "Upcoming",
 };
 
