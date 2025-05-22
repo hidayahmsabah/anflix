@@ -44,7 +44,7 @@ export const BackButton = styled.button`
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 0.75em;
+    font-size: 13px;
     margin-bottom: 20px;
     width:70px;
   }

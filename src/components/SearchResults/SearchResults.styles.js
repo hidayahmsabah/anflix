@@ -40,9 +40,6 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 450px) {
-    .load-more {
-      font-size: 0.7em;
-    }
 
     .criteria {
       font-size: 0.8em;

@@ -108,18 +108,18 @@ const AnimeInfo = ({ anime, seiyuu }) => {
                   {
                     anime?.mal ? [
                       anime?.mal.type && <span> {`${anime?.mal.type}`} </span>,
-                      anime?.mal.type && anime?.mal.status && <span className="break">|</span>,
+                      anime?.mal.type && (anime?.mal.status || anime?.mal.episodes) && <span className="break">|</span>,
                       anime?.mal.status && <span> {`${anime?.mal.status}`} </span>,
-                      anime?.mal.status && anime?.mal.episodes && <span className="break">|</span>,
+                      anime?.mal.status && (anime?.mal.episodes || (anime?.mal.season && anime?.mal.year)) && <span className="break">|</span>,
                       anime?.mal.episodes && <span> {`${anime?.mal.episodes} episode(s)`} </span>,
                       anime?.mal.episodes && anime?.mal.season && <span className="break">|</span>,
                       anime?.mal.season && anime?.mal.year && <span> {`${properCase(anime?.mal.season)} ${anime?.mal.year}`} </span>
                     ] :
                     anime?.anl && [
                       anime?.anl.format && <span> {`${anime?.anl.format}`} </span>,
-                      anime?.anl.format && anime?.anl.status && <span className="break">|</span>,
+                      anime?.anl.format && (anime?.anl.status || anime?.anl.episodes) && <span className="break">|</span>,
                       anime?.anl.status && <span> {`${anime?.anl.status}`} </span>,
-                      anime?.anl.status && anime?.anl.episodes && <span className="break">|</span>,
+                      anime?.anl.status && (anime?.anl.episodes || (anime?.anl.season && anime?.anl.seasonYear)) && <span className="break">|</span>,
                       anime?.anl.episodes && <span> {`${anime?.anl.episodes} episode(s)`} </span>,
                       anime?.anl.episodes && anime?.anl.season && <span className="break">|</span>,
                       anime?.anl.season && anime?.anl.seasonYear && <span> {`${properCase(anime?.anl.season)} ${anime?.anl.seasonYear}`} </span>
