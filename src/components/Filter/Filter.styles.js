@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaFilter } from "react-icons/fa";
 import { MdError } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
 
 export const Wrapper = styled.div`
   text-align: right;
@@ -12,8 +13,12 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-bottom: 5px;
 
     .filterButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: var(--black);
       border: none;
       color: var(--white);
@@ -52,6 +57,18 @@ export const ErrorLogo = styled(MdError)`
   vertical-align: bottom;
 `
 
+export const CloseLogo = styled(IoIosClose)`
+  font-size: 25px;
+  stroke-width: 15;
+  position: absolute;
+  top: 44%;
+  right: 6px;
+
+  :hover {
+    cursor: pointer;
+  }
+`
+
 export const Content = styled.form`
   position: relative;
   /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
@@ -72,6 +89,7 @@ export const Content = styled.form`
   }
 
   .input {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

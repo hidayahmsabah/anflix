@@ -3,7 +3,7 @@ import Select from "react-select";
 // import makeAnimated from "react-select/animated";
 import { useNavigate } from "react-router";
 import { getMALGenre, updateMALGenre, typeMal, statusMAL, ratingMAL } from "../../data/genres";
-import { Wrapper, FilterLogo, ErrorLogo, Content } from "./Filter.styles";
+import { Wrapper, FilterLogo, ErrorLogo, CloseLogo, Content } from "./Filter.styles";
 import fetchingData from "../../API";
 
 const Filter = ({ searchParams, scrollToTop }) => {
@@ -72,7 +72,12 @@ const Filter = ({ searchParams, scrollToTop }) => {
 
 
   function openFilter() {
-    filter ? setFilter(false) : setFilter(true);
+    if (filter) {
+      setFilter(false)
+      setEmptyFilter(false)
+    } else { 
+      setFilter(true)
+    }
   }
 
   function submitFilter(e) {
@@ -204,6 +209,15 @@ const Filter = ({ searchParams, scrollToTop }) => {
               setStateParams(val)
             }}
           />
+          {
+            inputValue !== "" && 
+              <CloseLogo 
+                onClick={() => {
+                  setInputValue("")
+                  setStateParams(prev => delete prev.q)
+                }}
+              />
+          }
         </div>
 
         {[optionsGenre, optionsType, optionsStatus, optionsRating].map(
